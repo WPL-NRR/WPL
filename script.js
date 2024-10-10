@@ -1,5 +1,21 @@
 // script.js
-let previousMatches = [];
+// Historical match data
+const historicalMatches = [
+    { team1: "TOP GUNS", team2: "WOODLANDS KHILADIS", score1: 139, overs1: 22, score2: 140, overs2: 15.5 },
+    { team1: "TOOFAN", team2: "BHAIRAVA", score1: 148, overs1: 22, score2: 132, overs2: 22 },
+    { team1: "RAGING BULLS", team2: "WOODLANDS UNITED", score1: 107, overs1: 22, score2: 109, overs2: 19.1 },
+    { team1: "RAGING BULLS", team2: "BHAIRAVA", score1: 122, overs1: 22, score2: 124, overs2: 17.5 },
+    { team1: "TOP GUNS", team2: "TOOFAN", score1: 151, overs1: 24.2, score2: 144, overs2: 25 },
+    { team1: "WOODLANDS UNITED", team2: "WOODLANDS KHILADIS", score1: 166, overs1: 25, score2: 98, overs2: 20.3 },
+    { team1: "TOOFAN", team2: "WOODLANDS UNITED", score1: 130, overs1: 22, score2: 129, overs2: 21.5 },
+    { team1: "RAGING BULLS", team2: "WOODLANDS KHILADIS", score1: 153, overs1: 22, score2: 137, overs2: 20.3 },
+    { team1: "TOP GUNS", team2: "BHAIRAVA", score1: 147, overs1: 22, score2: 141, overs2: 21.5 },
+    { team1: "BHAIRAVA", team2: "WOODLANDS KHILADIS", score1: 130, overs1: 21, score2: 126, overs2: 22 },
+    { team1: "TOOFAN", team2: "RAGING BULLS", score1: 154, overs1: 25, score2: 119, overs2: 22 },
+    { team1: "TOP GUNS", team2: "WOODLANDS UNITED", score1: 159, overs1: 25, score2: 158, overs2: 25 }
+];
+
+let previousMatches = [...historicalMatches];
 
 const calculateNRR = (team) => {
     let totalRunsScored = 0;
@@ -75,17 +91,15 @@ const updateStandings = () => {
         standingsBody.innerHTML += `
             <tr>
                 <td>${team}</td>
+                <td>${matches### Updated `script.js` (continued)
+```javascript
                 <td>${matchesPlayed}</td>
                 <td>${wins}</td>
                 <td>${losses}</td>
                 <td>${nrr}</td>
-            </tr>
-        `;
+            </tr>`;
     });
 };
 
-// Attach event listener
 document.getElementById("calculateBtn").addEventListener("click", calculateMatchResult);
-
-// Initial calculation for existing teams
 updateStandings();
