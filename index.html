@@ -28,11 +28,59 @@
         tr:hover {
             background-color: #ddd;
         }
+        form {
+            margin: 20px 0;
+        }
+        label {
+            display: block;
+            margin: 10px 0 5px;
+        }
     </style>
 </head>
 <body>
 
 <h1>Cricket Team Statistics</h1>
+
+<!-- Form to input scores and overs -->
+<form id="scoreForm">
+    <h2>Input Match Scores</h2>
+    <label for="team1">Select Team 1:</label>
+    <select id="team1" required>
+        <option value="">Select Team</option>
+        <option value="TOOFAN">TOOFAN</option>
+        <option value="TOP GUNS">TOP GUNS</option>
+        <option value="WOODLANDS UNITED">WOODLANDS UNITED</option>
+        <option value="BHAIRAVA">BHAIRAVA</option>
+        <option value="WOODLANDS KHILADIS">WOODLANDS KHILADIS</option>
+        <option value="RAGING BULLS">RAGING BULLS</option>
+    </select>
+
+    <label for="team1Score">Team 1 Score:</label>
+    <input type="number" id="team1Score" required placeholder="Runs scored by Team 1">
+
+    <label for="team1Overs">Team 1 Overs:</label>
+    <input type="number" id="team1Overs" required placeholder="Overs faced by Team 1" step="0.1">
+
+    <label for="team2">Select Team 2:</label>
+    <select id="team2" required>
+        <option value="">Select Team</option>
+        <option value="TOOFAN">TOOFAN</option>
+        <option value="TOP GUNS">TOP GUNS</option>
+        <option value="WOODLANDS UNITED">WOODLANDS UNITED</option>
+        <option value="BHAIRAVA">BHAIRAVA</option>
+        <option value="WOODLANDS KHILADIS">WOODLANDS KHILADIS</option>
+        <option value="RAGING BULLS">RAGING BULLS</option>
+    </select>
+
+    <label for="team2Score">Team 2 Score:</label>
+    <input type="number" id="team2Score" required placeholder="Runs scored by Team 2">
+
+    <label for="team2Overs">Team 2 Overs:</label>
+    <input type="number" id="team2Overs" required placeholder="Overs faced by Team 2" step="0.1">
+
+    <button type="submit">Submit</button>
+</form>
+
 <table>
     <thead>
         <tr>
@@ -48,7 +96,7 @@
             <th>Against</th>
         </tr>
     </thead>
-    <tbody>
+    <tbody id="teamStats">
         <tr>
             <td>1</td>
             <td>TOOFAN</td>
@@ -123,6 +171,59 @@
         </tr>
     </tbody>
 </table>
+
+<script>
+    document.getElementById('scoreForm').addEventListener('submit', function(e) {
+        e.preventDefault(); // Prevent default form submission
+
+        const team1 = document.getElementById('team1').value;
+        const team1Score = parseInt(document.getElementById('team1Score').value);
+        const team1Overs = parseFloat(document.getElementById('team1Overs').value);
+
+        const team2 = document.getElementById('team2').value;
+        const team2Score = parseInt(document.getElementById('team2Score').value);
+        const team2Overs = parseFloat(document.getElementById('team2Overs').value);
+
+        // Here you can update the relevant team's data and calculate NRR
+        updateTeamStats(team1, team1Score, team1Overs);
+        updateTeamStats(team2, team2Score, team2Overs);
+
+        // Reset form
+        document.getElementById('scoreForm').reset();
+    });
+
+    function updateTeamStats(team, score, overs) {
+        const rows = document.querySelectorAll('#teamStats tr');
+
+        rows.forEach(row => {
+            const cells = row.getElementsByTagName('td');
+            if (cells[1].textContent === team) {
+                // Update total runs and overs for the team
+                const oldFor = cells[8].textContent.split('/')[0]; // Runs scored
+                const oldAgainst = cells[9].textContent.split('/')[0]; // Runs conceded
+                const oldMat = parseInt(cells[2].textContent); // Matches played
+
+                // Update values
+                const newFor = parseInt(oldFor) + score;
+                const newAgainst = parseInt(oldAgainst) + (team === 'TOOFAN' ? team2Score : team1Score); // Assuming the opponent's score is added to against
+                const newMat = oldMat + 1; // Increase matches played
+
+                // Update the cells
+                cells[8].textContent = `${newFor}/${newMat * 22.0}`; // Assuming 22 overs per match
+                cells[9].textContent = `${newAgainst}/${newMat * 22.0}`; // Assuming 22 overs per match
+
+                // Calculate NRR
+                const newNetRR = ((newFor - newAgainst) / newMat) / 22.0; // Net RR calculation
+                cells[7].textContent = newNetRR.toFixed(2); // Update Net RR
+
+                // Update matches played
+                cells[2].textContent = newMat; // Update matches played
+            }
+        });
+
+        // Here, you may want to re-sort the table based on the updated NRR
+    }
+</script>
 
 </body>
 </html>
