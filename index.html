@@ -10,122 +10,6 @@
     <div class="container">
         <h1>Cricket Team NRR Predictor</h1>
         
-        <div id="teamInputs">
-            <!-- Woodlands Khiladis -->
-            <div class="team-input">
-                <h3>Woodlands Khiladis</h3>
-                <label for="teamKhiladisRunsScored">Total Runs Scored:</label>
-                <input type="number" id="teamKhiladisRunsScored" required>
-
-                <label for="teamKhiladisOversFaced">Total Overs Faced:</label>
-                <input type="number" id="teamKhiladisOversFaced" step="0.1" required>
-
-                <label for="teamKhiladisRunsConceded">Total Runs Conceded:</label>
-                <input type="number" id="teamKhiladisRunsConceded" required>
-
-                <label for="teamKhiladisOversBowled">Total Overs Bowled:</label>
-                <input type="number" id="teamKhiladisOversBowled" step="0.1" required>
-
-                <button onclick="calculateNRR('Khiladis')">Calculate NRR</button>
-                <p id="resultKhiladis"></p>
-            </div>
-
-            <!-- Raging Bulls -->
-            <div class="team-input">
-                <h3>Raging Bulls</h3>
-                <label for="teamBullsRunsScored">Total Runs Scored:</label>
-                <input type="number" id="teamBullsRunsScored" required>
-
-                <label for="teamBullsOversFaced">Total Overs Faced:</label>
-                <input type="number" id="teamBullsOversFaced" step="0.1" required>
-
-                <label for="teamBullsRunsConceded">Total Runs Conceded:</label>
-                <input type="number" id="teamBullsRunsConceded" required>
-
-                <label for="teamBullsOversBowled">Total Overs Bowled:</label>
-                <input type="number" id="teamBullsOversBowled" step="0.1" required>
-
-                <button onclick="calculateNRR('Bulls')">Calculate NRR</button>
-                <p id="resultBulls"></p>
-            </div>
-
-            <!-- Bhairava -->
-            <div class="team-input">
-                <h3>Bhairava</h3>
-                <label for="teamBhairavaRunsScored">Total Runs Scored:</label>
-                <input type="number" id="teamBhairavaRunsScored" required>
-
-                <label for="teamBhairavaOversFaced">Total Overs Faced:</label>
-                <input type="number" id="teamBhairavaOversFaced" step="0.1" required>
-
-                <label for="teamBhairavaRunsConceded">Total Runs Conceded:</label>
-                <input type="number" id="teamBhairavaRunsConceded" required>
-
-                <label for="teamBhairavaOversBowled">Total Overs Bowled:</label>
-                <input type="number" id="teamBhairavaOversBowled" step="0.1" required>
-
-                <button onclick="calculateNRR('Bhairava')">Calculate NRR</button>
-                <p id="resultBhairava"></p>
-            </div>
-
-            <!-- Woodlands United -->
-            <div class="team-input">
-                <h3>Woodlands United</h3>
-                <label for="teamWoodlandsRunsScored">Total Runs Scored:</label>
-                <input type="number" id="teamWoodlandsRunsScored" required>
-
-                <label for="teamWoodlandsOversFaced">Total Overs Faced:</label>
-                <input type="number" id="teamWoodlandsOversFaced" step="0.1" required>
-
-                <label for="teamWoodlandsRunsConceded">Total Runs Conceded:</label>
-                <input type="number" id="teamWoodlandsRunsConceded" required>
-
-                <label for="teamWoodlandsOversBowled">Total Overs Bowled:</label>
-                <input type="number" id="teamWoodlandsOversBowled" step="0.1" required>
-
-                <button onclick="calculateNRR('Woodlands')">Calculate NRR</button>
-                <p id="resultWoodlands"></p>
-            </div>
-
-            <!-- BBVS -->
-            <div class="team-input">
-                <h3>BBVS</h3>
-                <label for="teamBBVSRunsScored">Total Runs Scored:</label>
-                <input type="number" id="teamBBVSRunsScored" required>
-
-                <label for="teamBBVSOversFaced">Total Overs Faced:</label>
-                <input type="number" id="teamBBVSOversFaced" step="0.1" required>
-
-                <label for="teamBBVSRunsConceded">Total Runs Conceded:</label>
-                <input type="number" id="teamBBVSRunsConceded" required>
-
-                <label for="teamBBVSOversBowled">Total Overs Bowled:</label>
-                <input type="number" id="teamBBVSOversBowled" step="0.1" required>
-
-                <button onclick="calculateNRR('BBVS')">Calculate NRR</button>
-                <p id="resultBBVS"></p>
-            </div>
-
-            <!-- Toofan -->
-            <div class="team-input">
-                <h3>Toofan</h3>
-                <label for="teamToofanRunsScored">Total Runs Scored:</label>
-                <input type="number" id="teamToofanRunsScored" required>
-
-                <label for="teamToofanOversFaced">Total Overs Faced:</label>
-                <input type="number" id="teamToofanOversFaced" step="0.1" required>
-
-                <label for="teamToofanRunsConceded">Total Runs Conceded:</label>
-                <input type="number" id="teamToofanRunsConceded" required>
-
-                <label for="teamToofanOversBowled">Total Overs Bowled:</label>
-                <input type="number" id="teamToofanOversBowled" step="0.1" required>
-
-                <button onclick="calculateNRR('Toofan')">Calculate NRR</button>
-                <p id="resultToofan"></p>
-            </div>
-        </div>
-
         <h2>Current Standings</h2>
         <table>
             <thead>
@@ -139,6 +23,22 @@
                 </tr>
             </thead>
             <tbody id="standingsBody">
+                <tr>
+                    <td>Woodlands United</td>
+                    <td>4</td>
+                    <td>4</td>
+                    <td>0</td>
+                    <td>8</td>
+                    <td id="nrrWoodlands">+1.60</td>
+                </tr>
+                <tr>
+                    <td>Bhairava</td>
+                    <td>4</td>
+                    <td>3</td>
+                    <td>1</td>
+                    <td>6</td>
+                    <td id="nrrBhairava">+0.20</td>
+                </tr>
                 <tr>
                     <td>Woodlands Khiladis</td>
                     <td>4</td>
@@ -156,7 +56,68 @@
                     <td id="nrrBulls">-0.50</td>
                 </tr>
                 <tr>
-                    <td>Bhairava</td>
+                    <td>Toofan</td>
                     <td>4</td>
+                    <td>1</td>
                     <td>3</td>
-                    <td>1</td
+                    <td>2</td>
+                    <td id="nrrToofan">-1.80</td>
+                </tr>
+                <tr>
+                    <td>BBVS</td>
+                    <td>4</td>
+                    <td>0</td>
+                    <td>4</td>
+                    <td>0</td>
+                    <td id="nrrBBVS">-2.00</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>Update NRR</h2>
+        <label for="teamSelect">Select Team:</label>
+        <select id="teamSelect">
+            <option value="Khiladis">Woodlands Khiladis</option>
+            <option value="Bulls">Raging Bulls</option>
+            <option value="Bhairava">Bhairava</option>
+            <option value="Woodlands">Woodlands United</option>
+            <option value="Toofan">Toofan</option>
+            <option value="BBVS">BBVS</option>
+        </select>
+
+        <div id="teamInputs" style="margin-top: 20px;">
+            <h3>Enter Match Details</h3>
+            <label for="teamRunsScored">Total Runs Scored:</label>
+            <input type="number" id="teamRunsScored" required>
+
+            <label for="teamOversFaced">Total Overs Faced:</label>
+            <input type="number" id="teamOversFaced" step="0.1" required>
+
+            <label for="teamRunsConceded">Total Runs Conceded:</label>
+            <input type="number" id="teamRunsConceded" required>
+
+            <label for="teamOversBowled">Total Overs Bowled:</label>
+            <input type="number" id="teamOversBowled" step="0.1" required>
+
+            <button onclick="calculateSelectedTeamNRR()">Calculate NRR</button>
+            <p id="result"></p>
+        </div>
+    </div>
+
+    <script>
+        function calculateNRR(team) {
+            const runsScored = parseInt(document.getElementById(`team${team}RunsScored`).value);
+            const oversFaced = parseFloat(document.getElementById(`team${team}OversFaced`).value);
+            const runsConceded = parseInt(document.getElementById(`team${team}RunsConceded`).value);
+            const oversBowled = parseFloat(document.getElementById(`team${team}OversBowled`).value);
+            const nrr = ((runsScored / oversFaced) - (runsConceded / oversBowled)).toFixed(2);
+            document.getElementById(`result${team}`).innerText = `New NRR for ${team}: ${nrr}`;
+        }
+
+        function calculateSelectedTeamNRR() {
+            const selectedTeam = document.getElementById('teamSelect').value;
+            calculateNRR(selectedTeam);
+        }
+    </script>
+</body>
+</html>
