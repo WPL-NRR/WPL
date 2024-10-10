@@ -3,64 +3,114 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cricket Team NRR Predictor</title>
     <link rel="stylesheet" href="styles.css">
-    <title>NRR Calculator</title>
 </head>
 <body>
     <div class="container">
-        <h1>NRR Calculator</h1>
-        <label for="teamSelect">Select Team:</label>
-        <select id="teamSelect">
-            <option value="">Select Team</option>
-            <option value="TOP GUNS">TOP GUNS</option>
-            <option value="TOOFAN">TOOFAN</option>
-            <option value="WOODLANDS UNITED">WOODLANDS UNITED</option>
-            <option value="BHAIRAVA">BHAIRAVA</option>
-            <option value="WOODLANDS KHILADIS">WOODLANDS KHILADIS</option>
-            <option value="RAGING BULLS">RAGING BULLS</option>
-        </select>
-
-        <label for="oppositionSelect">Select Opposition:</label>
-        <select id="oppositionSelect">
-            <option value="">Select Opposition</option>
-            <option value="TOP GUNS">TOP GUNS</option>
-            <option value="TOOFAN">TOOFAN</option>
-            <option value="WOODLANDS UNITED">WOODLANDS UNITED</option>
-            <option value="BHAIRAVA">BHAIRAVA</option>
-            <option value="WOODLANDS KHILADIS">WOODLANDS KHILADIS</option>
-            <option value="RAGING BULLS">RAGING BULLS</option>
-        </select>
-
-        <label for="teamRunsScored">Team Runs Scored:</label>
-        <input type="number" id="teamRunsScored" />
-
-        <label for="teamOversFaced">Team Overs Faced:</label>
-        <input type="number" step="0.1" id="teamOversFaced" />
-
-        <label for="oppositionRunsScored">Opposition Runs Scored:</label>
-        <input type="number" id="oppositionRunsScored" />
-
-        <label for="oppositionOversBowled">Opposition Overs Bowled:</label>
-        <input type="number" step="0.1" id="oppositionOversBowled" />
-
-        <button id="calculateBtn">Calculate</button>
-
-        <div id="result"></div>
-
-        <h2>Standings</h2>
+        <h1>Cricket Team NRR Predictor</h1>
+        
+        <h2>Current Standings</h2>
         <table>
             <thead>
                 <tr>
                     <th>Team</th>
-                    <th>Matches</th>
+                    <th>Matches Played</th>
                     <th>Wins</th>
                     <th>Losses</th>
-                    <th>NRR</th>
+                    <th>Points</th>
+                    <th>Net Run Rate (NRR)</th>
                 </tr>
             </thead>
             <tbody id="standingsBody">
+                <tr>
+                    <td>Top Guns</td>
+                    <td>4</td>
+                    <td>3</td>
+                    <td>1</td>
+                    <td>6</td>
+                    <td>-0.2971</td>
+                </tr>
+                <tr>
+                    <td>Toofan</td>
+                    <td>4</td>
+                    <td>3</td>
+                    <td>1</td>
+                    <td>6</td>
+                    <td>0.4787</td>
+                </tr>
+                <tr>
+                    <td>Woodlands United</td>
+                    <td>4</td>
+                    <td>2</td>
+                    <td>2</td>
+                    <td>4</td>
+                    <td>0.9092</td>
+                </tr>
+                <tr>
+                    <td>Bhairava</td>
+                    <td>4</td>
+                    <td>2</td>
+                    <td>2</td>
+                    <td>4</td>
+                    <td>0.1158</td>
+                </tr>
+                <tr>
+                    <td>Woodlands Khiladis</td>
+                    <td>4</td>
+                    <td>1</td>
+                    <td>3</td>
+                    <td>2</td>
+                    <td>-0.5558</td>
+                </tr>
+                <tr>
+                    <td>Raging Bulls</td>
+                    <td>4</td>
+                    <td>1</td>
+                    <td>3</td>
+                    <td>2</td>
+                    <td>-0.7326</td>
+                </tr>
             </tbody>
         </table>
+
+        <h2>Update NRR</h2>
+        <div id="matchInput">
+            <h3>Your Team Input</h3>
+            <label for="teamSelect">Select Your Team:</label>
+            <select id="teamSelect">
+                <option value="Top Guns">Top Guns</option>
+                <option value="Toofan">Toofan</option>
+                <option value="Woodlands United">Woodlands United</option>
+                <option value="Bhairava">Bhairava</option>
+                <option value="Woodlands Khiladis">Woodlands Khiladis</option>
+                <option value="Raging Bulls">Raging Bulls</option>
+            </select>
+
+            <label for="teamRunsScored">Total Runs Scored:</label>
+            <input type="number" id="teamRunsScored" required>
+            <label for="teamOversFaced">Total Overs Faced:</label>
+            <input type="number" id="teamOversFaced" step="0.1" required>
+
+            <h3>Opponent Team Input</h3>
+            <label for="oppositionSelect">Select Opposition:</label>
+            <select id="oppositionSelect">
+                <option value="Top Guns">Top Guns</option>
+                <option value="Toofan">Toofan</option>
+                <option value="Woodlands United">Woodlands United</option>
+                <option value="Bhairava">Bhairava</option>
+                <option value="Woodlands Khiladis">Woodlands Khiladis</option>
+                <option value="Raging Bulls">Raging Bulls</option>
+            </select>
+
+            <label for="oppositionRunsScored">Opposition Team Score:</label>
+            <input type="number" id="oppositionRunsScored" required>
+            <label for="oppositionOversBowled">Total Overs Bowled:</label>
+            <input type="number" id="oppositionOversBowled" step="0.1" required>
+
+            <button id="calculateBtn">Calculate NRR & Update Points</button>
+            <p id="result"></p>
+        </div>
     </div>
 
     <script src="script.js"></script>
