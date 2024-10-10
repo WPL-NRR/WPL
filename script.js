@@ -1,135 +1,103 @@
 const teams = [
-    { name: "WOODLANDS UNITED", matches: 0, wins: 0, losses: 0, points: 0, nrr: 0 },
-    { name: "WOODLANDS KHILADIS", matches: 0, wins: 0, losses: 0, points: 0, nrr: 0 },
-    { name: "BHAIRAVA", matches: 0, wins: 0, losses: 0, points: 0, nrr: 0 },
-    { name: "RAGING BULLS", matches: 0, wins: 0, losses: 0, points: 0, nrr: 0 },
-    { name: "TOP GUNS", matches: 0, wins: 0, losses: 0, points: 0, nrr: 0 },
-    { name: "TOOFAN", matches: 0, wins: 0, losses: 0, points: 0, nrr: 0 },
+    { name: "TOP GUNS", matchesPlayed: 0, wins: 0, losses: 0, points: 0, nrr: 0 },
+    { name: "TOOFAN", matchesPlayed: 0, wins: 0, losses: 0, points: 0, nrr: 0 },
+    { name: "BHAIRAVA", matchesPlayed: 0, wins: 0, losses: 0, points: 0, nrr: 0 },
+    { name: "WOODLANDS KHILADIS", matchesPlayed: 0, wins: 0, losses: 0, points: 0, nrr: 0 },
+    { name: "RAGING BULLS", matchesPlayed: 0, wins: 0, losses: 0, points: 0, nrr: 0 },
+    { name: "WOODLANDS UNITED", matchesPlayed: 0, wins: 0, losses: 0, points: 0, nrr: 0 }
 ];
 
 const matchHistory = [
-    { teamOne: "TOP GUNS", teamTwo: "WOODLANDS KHILADIS", result: "WOODLANDS KHILADIS", scoreSummary: "TOP GUNS: 139/6(22.0) WOODLANDS KHILADIS: 140/4(15.5)" },
-    { teamOne: "TOOFAN", teamTwo: "BHAIRAVA", result: "TOOFAN", scoreSummary: "TOOFAN: 148/8(22.0) BHAIRAVA: 132/9(22.0)" },
-    { teamOne: "RAGING BULLS", teamTwo: "WOODLANDS UNITED", result: "WOODLANDS UNITED", scoreSummary: "RAGING BULLS: 107/10(22.0) WOODLANDS UNITED: 109/2(19.1)" },
-    { teamOne: "RAGING BULLS", teamTwo: "BHAIRAVA", result: "BHAIRAVA", scoreSummary: "RAGING BULLS: 122/11(22.0) BHAIRAVA: 124/4(17.5)" },
-    { teamOne: "TOP GUNS", teamTwo: "TOOFAN", result: "TOP GUNS", scoreSummary: "TOP GUNS: 151/11(24.2) TOOFAN: 144/7(25.0)" },
-    { teamOne: "WOODLANDS UNITED", teamTwo: "WOODLANDS KHILADIS", result: "WOODLANDS UNITED", scoreSummary: "WOODLANDS UNITED: 166/10(25.0) WOODLANDS KHILADIS: 98/11(20.3)" },
-    { teamOne: "TOOFAN", teamTwo: "WOODLANDS UNITED", result: "TOOFAN", scoreSummary: "TOOFAN: 130/10(22.0) WOODLANDS UNITED: 129/11(21.5)" },
-    { teamOne: "RAGING BULLS", teamTwo: "WOODLANDS KHILADIS", result: "RAGING BULLS", scoreSummary: "RAGING BULLS: 153/11(22.0) WOODLANDS KHILADIS: 137/11(20.3)" },
-    { teamOne: "TOP GUNS", teamTwo: "BHAIRAVA", result: "TOP GUNS", scoreSummary: "TOP GUNS: 147/9(22.0) BHAIRAVA: 141/10(21.5)" },
-    { teamOne: "BHAIRAVA", teamTwo: "WOODLANDS KHILADIS", result: "BHAIRAVA", scoreSummary: "BHAIRAVA: 130/11(21.0) WOODLANDS KHILADIS: 126/10(22.0)" },
-    { teamOne: "TOOFAN", teamTwo: "RAGING BULLS", result: "TOOFAN", scoreSummary: "TOOFAN: 154/10(25.0) RAGING BULLS: 119/11(22.0)" },
-    { teamOne: "TOP GUNS", teamTwo: "WOODLANDS UNITED", result: "TOP GUNS", scoreSummary: "TOP GUNS: 159/9(25.0) WOODLANDS UNITED: 158/9(25.0)" },
+    { teamOne: "TOP GUNS", teamTwo: "WOODLANDS KHILADIS", score: "139/6", oversFaced: 22.0, opponentScore: "140/4", opponentOvers: 15.5, result: "WOODLANDS KHILADIS won by 10 Wickets" },
+    { teamOne: "TOOFAN", teamTwo: "BHAIRAVA", score: "148/8", oversFaced: 22.0, opponentScore: "132/9", opponentOvers: 22.0, result: "TOOFAN won by 16 Run(s)" },
+    { teamOne: "RAGING BULLS", teamTwo: "WOODLANDS UNITED", score: "107/10", oversFaced: 22.0, opponentScore: "109/2", opponentOvers: 19.1, result: "WOODLANDS UNITED won by 12 Wickets" },
+    { teamOne: "RAGING BULLS", teamTwo: "BHAIRAVA", score: "122/11", oversFaced: 22.0, opponentScore: "124/4", opponentOvers: 17.5, result: "BHAIRAVA won by 10 Wickets" },
+    { teamOne: "TOP GUNS", teamTwo: "TOOFAN", score: "151/11", oversFaced: 24.2, opponentScore: "144/7", opponentOvers: 25.0, result: "TOP GUNS won by 7 Run(s)" },
+    { teamOne: "WOODLANDS UNITED", teamTwo: "WOODLANDS KHILADIS", score: "166/10", oversFaced: 25.0, opponentScore: "98/11", opponentOvers: 20.3, result: "WOODLANDS UNITED won by 68 Run(s)" },
+    { teamOne: "TOOFAN", teamTwo: "WOODLANDS UNITED", score: "130/10", oversFaced: 22.0, opponentScore: "129/11", opponentOvers: 21.5, result: "TOOFAN won by 1 Run(s)" },
+    { teamOne: "RAGING BULLS", teamTwo: "WOODLANDS KHILADIS", score: "153/11", oversFaced: 22.0, opponentScore: "137/11", opponentOvers: 20.3, result: "RAGING BULLS won by 16 Run(s)" },
+    { teamOne: "TOP GUNS", teamTwo: "BHAIRAVA", score: "147/9", oversFaced: 22.0, opponentScore: "141/10", opponentOvers: 21.5, result: "TOP GUNS won by 6 Run(s)" },
+    { teamOne: "BHAIRAVA", teamTwo: "WOODLANDS KHILADIS", score: "130/11", oversFaced: 21.0, opponentScore: "126/10", opponentOvers: 22.0, result: "BHAIRAVA won by 4 Run(s)" },
+    { teamOne: "TOOFAN", teamTwo: "RAGING BULLS", score: "154/10", oversFaced: 25.0, opponentScore: "119/11", opponentOvers: 22.0, result: "TOOFAN won by 35 Run(s)" },
+    { teamOne: "TOP GUNS", teamTwo: "WOODLANDS UNITED", score: "159/9", oversFaced: 25.0, opponentScore: "158/9", opponentOvers: 25.0, result: "TOP GUNS won by 1 Run(s)" }
 ];
 
-function populateTeamDropdowns() {
-    const yourTeamSelect = document.getElementById("yourTeam");
-    const opponentTeamSelect = document.getElementById("opponentTeam");
-
-    teams.forEach((team) => {
-        const option = document.createElement("option");
-        option.value = team.name;
-        option.textContent = team.name;
-        yourTeamSelect.appendChild(option);
-
-        const opponentOption = document.createElement("option");
-        opponentOption.value = team.name;
-        opponentOption.textContent = team.name;
-        opponentTeamSelect.appendChild(opponentOption);
-    });
+// Function to calculate NRR
+function calculateNRR(runsScored, oversFaced, opponentScore, oversBowled) {
+    const runRate = runsScored / oversFaced;
+    const opponentRunRate = opponentScore / oversBowled;
+    return runRate - opponentRunRate;
 }
 
+// Function to update standings
 function updateStandings() {
-    const standingsTable = document.getElementById("standings");
-    standingsTable.innerHTML = `
-        <tr>
-            <th>Team</th>
-            <th>Matches Played</th>
-            <th>Wins</th>
-            <th>Losses</th>
-            <th>Points</th>
-            <th>Net Run Rate (NRR)</th>
-        </tr>
-    `;
+    const tbody = document.querySelector("#standings tbody");
+    tbody.innerHTML = ""; // Clear previous rows
 
     teams.forEach(team => {
         const row = document.createElement("tr");
         row.innerHTML = `
             <td>${team.name}</td>
-            <td>${team.matches}</td>
+            <td>${team.matchesPlayed}</Here's the continuation and completion of the JavaScript code for your cricket NRR dashboard:
+
+### Continued `script.js`
+```javascript
+            <td>${team.matchesPlayed}</td>
             <td>${team.wins}</td>
             <td>${team.losses}</td>
             <td>${team.points}</td>
             <td>${team.nrr.toFixed(2)}</td>
         `;
-        standingsTable.appendChild(row);
+        tbody.appendChild(row);
     });
 }
 
-function calculateNRR() {
-    const yourTeam = document.getElementById("yourTeam").value;
-    const yourRuns = parseInt(document.getElementById("yourRuns").value);
-    const yourOvers = parseFloat(document.getElementById("yourOvers").value);
-    const opponentTeam = document.getElementById("opponentTeam").value;
-    const opponentRuns = parseInt(document.getElementById("opponentRuns").value);
-    const opponentOvers = parseFloat(document.getElementById("opponentOvers").value);
+// Event listener for calculating NRR and updating points
+document.getElementById("calculate-btn").addEventListener("click", () => {
+    const yourTeam = document.getElementById("your-team").value;
+    const runsScored = parseInt(document.getElementById("runs-scored").value);
+    const oversFaced = parseFloat(document.getElementById("overs-faced").value);
+    const opposition = document.getElementById("opposition").value;
+    const opponentScore = parseInt(document.getElementById("opponent-score").value);
+    const oversBowled = parseFloat(document.getElementById("overs-bowled").value);
 
-    if (!yourTeam || !opponentTeam || yourTeam === opponentTeam) {
-        alert("Please select valid teams.");
-        return;
-    }
+    if (yourTeam && opposition && !isNaN(runsScored) && !isNaN(oversFaced) && !isNaN(opponentScore) && !isNaN(oversBowled)) {
+        const yourTeamObj = teams.find(team => team.name === yourTeam);
+        const oppositionTeamObj = teams.find(team => team.name === opposition);
+        
+        // Update matches played and wins/losses based on the result
+        yourTeamObj.matchesPlayed++;
+        oppositionTeamObj.matchesPlayed++;
+        
+        // Determine result
+        if (runsScored > opponentScore) {
+            yourTeamObj.wins++;
+            oppositionTeamObj.losses++;
+            yourTeamObj.points += 2; // Win gives 2 points
+        } else {
+            oppositionTeamObj.wins++;
+            yourTeamObj.losses++;
+            oppositionTeamObj.points += 2; // Win gives 2 points
+        }
 
-    const yourTeamData = teams.find(team => team.name === yourTeam);
-    const opponentTeamData = teams.find(team => team.name === opponentTeam);
+        // Calculate NRR
+        const nrr = calculateNRR(runsScored, oversFaced, opponentScore, oversBowled);
+        yourTeamObj.nrr = nrr;
 
-    // Ensure each team only plays one match
-    if (yourTeamData.matches >= 1 || opponentTeamData.matches >= 1) {
-        alert("Each team can only play one match.");
-        return;
-    }
+        // Update standings
+        updateStandings();
 
-It seems the previous message was cut off. Here is the continuation of the `script.js` file and the complete updates:
-
-```javascript
-    // Update matches played
-    yourTeamData.matches++;
-    opponentTeamData.matches++;
-
-    // Update runs and overs for NRR calculation
-    const yourTeamRunsForNRR = yourRuns;
-    const yourTeamOversForNRR = yourOvers;
-
-    const opponentTeamRunsForNRR = opponentRuns;
-    const opponentTeamOversForNRR = opponentOvers;
-
-    // Calculate NRR
-    const yourNRR = (yourTeamRunsForNRR / yourTeamOversForNRR) - (opponentTeamRunsForNRR / opponentTeamOversForNRR);
-    const opponentNRR = (opponentTeamRunsForNRR / opponentTeamOversForNRR) - (yourTeamRunsForNRR / yourTeamOversForNRR);
-
-    // Update NRR for teams
-    yourTeamData.nrr = yourNRR;
-    opponentTeamData.nrr = opponentNRR;
-
-    // Update points based on results
-    if (yourRuns > opponentRuns) {
-        yourTeamData.wins++;
-        opponentTeamData.losses++;
-        yourTeamData.points += 2; // Winner gets 2 points
-    } else if (yourRuns < opponentRuns) {
-        opponentTeamData.wins++;
-        yourTeamData.losses++;
-        opponentTeamData.points += 2; // Winner gets 2 points
+        // Reset input fields
+        document.getElementById("your-team").value = "";
+        document.getElementById("runs-scored").value = "";
+        document.getElementById("overs-faced").value = "";
+        document.getElementById("opposition").value = "";
+        document.getElementById("opponent-score").value = "";
+        document.getElementById("overs-bowled").value = "";
     } else {
-        // In case of a draw
-        yourTeamData.points++;
-        opponentTeamData.points++;
+        alert("Please fill all fields correctly.");
     }
+});
 
-    // Update standings display
-    updateStandings();
-}
-
-// Initialize the page
-populateTeamDropdowns();
+// Initialize standings
 updateStandings();
-document.getElementById("calculateButton").addEventListener("click", calculateNRR);
