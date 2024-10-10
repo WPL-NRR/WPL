@@ -4,8 +4,8 @@ body {
     background-color: #f4f4f4;
     display: flex;
     justify-content: center;
-    align-items: center;
-    height: 100vh;
+    align-items: flex-start;
+    padding: 20px;
     margin: 0;
 }
 
@@ -14,7 +14,7 @@ body {
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    width: 400px; /* Set a fixed width for consistency */
+    width: 600px; /* Set a fixed width for consistency */
 }
 
 .team-input {
@@ -45,4 +45,20 @@ button:hover {
 p {
     margin-top: 10px; /* Add space for results */
     font-weight: bold; /* Make results bold */
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px; /* Add space above the table */
+}
+
+th, td {
+    border: 1px solid #ccc;
+    padding: 8px;
+    text-align: left;
+}
+
+th {
+    background-color: #f2f2f2;
 }
