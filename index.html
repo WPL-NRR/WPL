@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cricket Team NRR Predictor</title>
+    <title>Cricket Team NRR Dashboard</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="container">
-        <h1>Cricket Team NRR Predictor</h1>
+        <h1>Cricket Team NRR Dashboard</h1>
         
         <h2>Current Standings</h2>
         <table>
@@ -23,54 +23,7 @@
                 </tr>
             </thead>
             <tbody id="standingsBody">
-                <tr>
-                    <td>Top Guns</td>
-                    <td>4</td>
-                    <td>3</td>
-                    <td>1</td>
-                    <td>6</td>
-                    <td>-0.2971</td>
-                </tr>
-                <tr>
-                    <td>Toofan</td>
-                    <td>4</td>
-                    <td>3</td>
-                    <td>1</td>
-                    <td>6</td>
-                    <td>0.4787</td>
-                </tr>
-                <tr>
-                    <td>Woodlands United</td>
-                    <td>4</td>
-                    <td>2</td>
-                    <td>2</td>
-                    <td>4</td>
-                    <td>0.9092</td>
-                </tr>
-                <tr>
-                    <td>Bhairava</td>
-                    <td>4</td>
-                    <td>2</td>
-                    <td>2</td>
-                    <td>4</td>
-                    <td>0.1158</td>
-                </tr>
-                <tr>
-                    <td>Woodlands Khiladis</td>
-                    <td>4</td>
-                    <td>1</td>
-                    <td>3</td>
-                    <td>2</td>
-                    <td>-0.5558</td>
-                </tr>
-                <tr>
-                    <td>Raging Bulls</td>
-                    <td>4</td>
-                    <td>1</td>
-                    <td>3</td>
-                    <td>2</td>
-                    <td>-0.7326</td>
-                </tr>
+                <!-- Current Stats Go Here -->
             </tbody>
         </table>
 
@@ -79,12 +32,7 @@
             <h3>Your Team Input</h3>
             <label for="teamSelect">Select Your Team:</label>
             <select id="teamSelect">
-                <option value="Top Guns">Top Guns</option>
-                <option value="Toofan">Toofan</option>
-                <option value="Woodlands United">Woodlands United</option>
-                <option value="Bhairava">Bhairava</option>
-                <option value="Woodlands Khiladis">Woodlands Khiladis</option>
-                <option value="Raging Bulls">Raging Bulls</option>
+                <!-- Teams will be loaded dynamically -->
             </select>
 
             <label for="teamRunsScored">Total Runs Scored:</label>
@@ -95,13 +43,7 @@
             <h3>Opponent Team Input</h3>
             <label for="oppositionSelect">Select Opposition:</label>
             <select id="oppositionSelect">
-                <option value="" disabled selected>Select an opponent</option>
-                <option value="Top Guns">Top Guns</option>
-                <option value="Toofan">Toofan</option>
-                <option value="Woodlands United">Woodlands United</option>
-                <option value="Bhairava">Bhairava</option>
-                <option value="Woodlands Khiladis">Woodlands Khiladis</option>
-                <option value="Raging Bulls">Raging Bulls</option>
+                <!-- Teams will be loaded dynamically -->
             </select>
 
             <label for="oppositionRunsScored">Opposition Team Score:</label>
@@ -115,6 +57,5 @@
     </div>
 
     <script src="script.js"></script>
-    <button onclick="calculateMatchResult()">Calculate</button>
 </body>
 </html>
