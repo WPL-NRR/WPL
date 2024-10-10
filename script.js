@@ -1,105 +1,101 @@
 // script.js
-// Historical match data
 const historicalMatches = [
-    { team1: "TOP GUNS", team2: "WOODLANDS KHILADIS", score1: 139, overs1: 22, score2: 140, overs2: 15.5 },
-    { team1: "TOOFAN", team2: "BHAIRAVA", score1: 148, overs1: 22, score2: 132, overs2: 22 },
-    { team1: "RAGING BULLS", team2: "WOODLANDS UNITED", score1: 107, overs1: 22, score2: 109, overs2: 19.1 },
-    { team1: "RAGING BULLS", team2: "BHAIRAVA", score1: 122, overs1: 22, score2: 124, overs2: 17.5 },
-    { team1: "TOP GUNS", team2: "TOOFAN", score1: 151, overs1: 24.2, score2: 144, overs2: 25 },
-    { team1: "WOODLANDS UNITED", team2: "WOODLANDS KHILADIS", score1: 166, overs1: 25, score2: 98, overs2: 20.3 },
-    { team1: "TOOFAN", team2: "WOODLANDS UNITED", score1: 130, overs1: 22, score2: 129, overs2: 21.5 },
-    { team1: "RAGING BULLS", team2: "WOODLANDS KHILADIS", score1: 153, overs1: 22, score2: 137, overs2: 20.3 },
-    { team1: "TOP GUNS", team2: "BHAIRAVA", score1: 147, overs1: 22, score2: 141, overs2: 21.5 },
-    { team1: "BHAIRAVA", team2: "WOODLANDS KHILADIS", score1: 130, overs1: 21, score2: 126, overs2: 22 },
-    { team1: "TOOFAN", team2: "RAGING BULLS", score1: 154, overs1: 25, score2: 119, overs2: 22 },
-    { team1: "TOP GUNS", team2: "WOODLANDS UNITED", score1: 159, overs1: 25, score2: 158, overs2: 25 }
+    { teamOne: "TOP GUNS", teamTwo: "WOODLANDS KHILADIS", teamOneScore: 139, teamOneOvers: 22, teamTwoScore: 140, teamTwoOvers: 15.5 },
+    { teamOne: "TOOFAN", teamTwo: "BHAIRAVA", teamOneScore: 148, teamOneOvers: 22, teamTwoScore: 132, teamTwoOvers: 22 },
+    { teamOne: "RAGING BULLS", teamTwo: "WOODLANDS UNITED", teamOneScore: 107, teamOneOvers: 22, teamTwoScore: 109, teamTwoOvers: 19.1 },
+    { teamOne: "RAGING BULLS", teamTwo: "BHAIRAVA", teamOneScore: 122, teamOneOvers: 22, teamTwoScore: 124, teamTwoOvers: 17.5 },
+    { teamOne: "TOP GUNS", teamTwo: "TOOFAN", teamOneScore: 151, teamOneOvers: 24.2, teamTwoScore: 144, teamTwoOvers: 25 },
+    { teamOne: "WOODLANDS UNITED", teamTwo: "WOODLANDS KHILADIS", teamOneScore: 166, teamOneOvers: 25, teamTwoScore: 98, teamTwoOvers: 20.3 },
+    { teamOne: "TOOFAN", teamTwo: "WOODLANDS UNITED", teamOneScore: 130, teamOneOvers: 22, teamTwoScore: 129, teamTwoOvers: 21.5 },
+    { teamOne: "RAGING BULLS", teamTwo: "WOODLANDS KHILADIS", teamOneScore: 153, teamOneOvers: 22, teamTwoScore: 137, teamTwoOvers: 20.3 },
+    { teamOne: "TOP GUNS", teamTwo: "BHAIRAVA", teamOneScore: 147, teamOneOvers: 22, teamTwoScore: 141, teamTwoOvers: 21.5 },
+    { teamOne: "BHAIRAVA", teamTwo: "WOODLANDS KHILADIS", teamOneScore: 130, teamOneOvers: 21, teamTwoScore: 126, teamTwoOvers: 22 },
+    { teamOne: "TOOFAN", teamTwo: "RAGING BULLS", teamOneScore: 154, teamOneOvers: 25, teamTwoScore: 119, teamTwoOvers: 22 },
+    { teamOne: "TOP GUNS", teamTwo: "WOODLANDS UNITED", teamOneScore: 159, teamOneOvers: 25, teamTwoScore: 158, teamTwoOvers: 25 }
 ];
 
-let previousMatches = [...historicalMatches];
+let standings = {
+    "Top Guns": { matchesPlayed: 4, wins: 3, losses: 1, points: 6, nrr: -0.2971 },
+    "Toofan": { matchesPlayed: 4, wins: 3, losses: 1, points: 6, nrr: 0.4787 },
+    "Woodlands United": { matchesPlayed: 4, wins: 2, losses: 2, points: 4, nrr: 0.9092 },
+    "Bhairava": { matchesPlayed: 4, wins: 2, losses: 2, points: 4, nrr: 0.1158 },
+    "Woodlands Khiladis": { matchesPlayed: 4, wins: 1, losses: 3, points: 2, nrr: -0.5558 },
+    "Raging Bulls": { matchesPlayed: 4, wins: 1, losses: 3, points: 2, nrr: -0.7326 }
+};
 
-const calculateNRR = (team) => {
-    let totalRunsScored = 0;
-    let totalOversFaced = 0;
-    let totalRunsConceded = 0;
-    let totalOversBowled = 0;
-
-    previousMatches.forEach(match => {
-        if (match.team1 === team) {
-            totalRunsScored += match.score1;
-            totalOversFaced += match.overs1;
-            totalRunsConceded += match.score2;
-            totalOversBowled += match.overs2;
-        } else if (match.team2 === team) {
-            totalRunsScored += match.score2;
-            totalOversFaced += match.overs2;
-            totalRunsConceded += match.score1;
-            totalOversBowled += match.overs1;
-        }
-    });
-
-    const nrr = totalOversFaced && totalOversBowled ? ((totalRunsScored / totalOversFaced) - (totalRunsConceded / totalOversBowled)).toFixed(4) : 0;
-    return nrr;
+const calculateNRR = (runsScored, oversFaced, oppositionScore, oversBowled) => {
+    const runRateTeam = runsScored / oversFaced;
+    const runRateOpposition = oppositionScore / oversBowled;
+    return (runRateTeam - runRateOpposition).toFixed(4);
 };
 
 const calculateMatchResult = () => {
-    const team = document.getElementById("teamSelect").value;
-    const opposition = document.getElementById("oppositionSelect").value;
+    const team = document.getElementById('teamSelect').value;
+    const opposition = document.getElementById('oppositionSelect').value;
 
-    if (team === opposition) {
-        document.getElementById("result").innerText = "Please select different teams for both.";
-        return;
-    }
+Here's the continuation and completion of the updated `script.js`, as well as the `styles.css` file.
 
-    if (previousMatches.some(match => (match.team1 === team && match.team2 === opposition) || (match.team1 === opposition && match.team2 === team))) {
-        document.getElementById("result").innerText = `${team} and ${opposition} have already played one match against each other.`;
-        return;
-    }
-
-    const teamRunsScored = parseInt(document.getElementById("teamRunsScored").value);
-    const teamOversFaced = parseFloat(document.getElementById("teamOversFaced").value);
-    const oppositionRunsScored = parseInt(document.getElementById("oppositionRunsScored").value);
-    const oppositionOversBowled = parseFloat(document.getElementById("oppositionOversBowled").value);
-
-    const newMatch = {
-        team1: team,
-        team2: opposition,
-        score1: teamRunsScored,
-        overs1: teamOversFaced,
-        score2: oppositionRunsScored,
-        overs2: oppositionOversBowled
-    };
-
-    previousMatches.push(newMatch);
-    
-    const nrr = calculateNRR(team);
-    document.getElementById("result").innerText = `Updated NRR for ${team} is ${nrr}`;
-
-    updateStandings();
-};
-
-const updateStandings = () => {
-    const standingsBody = document.getElementById("standingsBody");
-    standingsBody.innerHTML = ""; // Clear existing rows
-
-    const teams = ["TOP GUNS", "TOOFAN", "WOODLANDS UNITED", "BHAIRAVA", "WOODLANDS KHILADIS", "RAGING BULLS"];
-    teams.forEach(team => {
-        const nrr = calculateNRR(team);
-        const matchesPlayed = previousMatches.filter(match => match.team1 === team || match.team2 === team).length;
-        const wins = previousMatches.filter(match => (match.team1 === team && match.score1 > match.score2) || (match.team2 === team && match.score2 > match.score1)).length;
-        const losses = matchesPlayed - wins;
-
-        standingsBody.innerHTML += `
-            <tr>
-                <td>${team}</td>
-                <td>${matches### Updated `script.js` (continued)
+### Continued and Updated `script.js`
 ```javascript
-                <td>${matchesPlayed}</td>
-                <td>${wins}</td>
-                <td>${losses}</td>
-                <td>${nrr}</td>
-            </tr>`;
-    });
+    const teamRunsScored = Number(document.getElementById('teamRunsScored').value);
+    const teamOversFaced = Number(document.getElementById('teamOversFaced').value);
+    const oppositionRunsScored = Number(document.getElementById('oppositionRunsScored').value);
+    const oppositionOversBowled = Number(document.getElementById('oppositionOversBowled').value);
+
+    // Check for duplicate matches
+    if (team === opposition) {
+        alert("A team cannot play against itself!");
+        return;
+    }
+
+    // Historical Matches
+    const historicalMatchesForTeam = historicalMatches.filter(match => 
+        (match.teamOne === team && match.teamTwo === opposition) || 
+        (match.teamOne === opposition && match.teamTwo === team)
+    );
+
+    if (historicalMatchesForTeam.length >= 5) {
+        alert("Maximum number of matches played against this team reached!");
+        return;
+    }
+
+    // Calculate NRR
+    const nrr = calculateNRR(teamRunsScored, teamOversFaced, oppositionRunsScored, oppositionOversBowled);
+    const totalMatchesPlayed = standings[team].matchesPlayed + 1;
+    
+    standings[team].matchesPlayed = totalMatchesPlayed;
+    standings[team].nrr = ((standings[team].nrr * (totalMatchesPlayed - 1)) + Number(nrr)) / totalMatchesPlayed;
+
+    // Update Points
+    if (teamRunsScored > oppositionRunsScored) {
+        standings[team].wins += 1;
+        standings[opposition].losses += 1;
+        standings[team].points += 2;
+    } else {
+        standings[opposition].wins += 1;
+        standings[team].losses += 1;
+        standings[opposition].points += 2;
+    }
+
+    // Update the standings display
+    displayStandings();
+    document.getElementById('result').innerText = `Calculated NRR: ${nrr}`;
 };
 
-document.getElementById("calculateBtn").addEventListener("click", calculateMatchResult);
-updateStandings();
+const displayStandings = () => {
+    const standingsBody = document.getElementById('standingsBody');
+    standingsBody.innerHTML = '';
+    for (let team in standings) {
+        const row = `<tr>
+            <td>${team}</td>
+            <td>${standings[team].matchesPlayed}</td>
+            <td>${standings[team].wins}</td>
+            <td>${standings[team].losses}</td>
+            <td>${standings[team].points}</td>
+            <td>${standings[team].nrr.toFixed(4)}</td>
+        </tr>`;
+        standingsBody.innerHTML += row;
+    }
+};
+
+document.getElementById('calculateBtn').addEventListener('click', calculateMatchResult);
