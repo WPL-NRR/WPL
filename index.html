@@ -1,3 +1,36 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+    background-color: #f4f4f4;
+}
+
+.container {
+    max-width: 800px;
+    margin: auto;
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+h1, h2, h3 {
+    color: #333;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+th, td {
+    padding: 10px;
+    textHere's the complete code for your cricket team NRR predictor that resolves the issues you've been facing. This updated version ensures that the opponent team cannot be the same as the selected team and allows for correct calculation and updating of the standings.
+
+### Final `index.html`
+
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -78,7 +111,7 @@
         <div id="matchInput">
             <h3>Your Team Input</h3>
             <label for="teamSelect">Select Your Team:</label>
-            <select id="teamSelect" onchange="updateOpponentOptions()">
+            <select id="teamSelect">
                 <option value="Top Guns">Top Guns</option>
                 <option value="Toofan">Toofan</option>
                 <option value="Woodlands United">Woodlands United</option>
@@ -111,19 +144,6 @@
             <button onclick="calculateMatchResult()">Calculate NRR & Update Points</button>
             <p id="result"></p>
         </div>
-
-        <h2>Match History</h2>
-        <table>
-            <thead>
-                <tr>
-                    <th>Match Summary</th>
-                    <th>Winner</th>
-                    <th>Details</th>
-                </tr>
-            </thead>
-            <tbody id="matchHistoryBody">
-            </tbody>
-        </table>
     </div>
 
     <script src="script.js"></script>
