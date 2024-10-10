@@ -24,65 +24,75 @@
             </thead>
             <tbody id="standingsBody">
                 <tr>
-                    <td>Woodlands United</td>
-                    <td>4</td>
-                    <td>4</td>
-                    <td>0</td>
-                    <td>8</td>
-                    <td id="nrrWoodlands">+1.60</td>
-                </tr>
-                <tr>
-                    <td>Bhairava</td>
+                    <td>Top Guns</td>
                     <td>4</td>
                     <td>3</td>
                     <td>1</td>
                     <td>6</td>
-                    <td id="nrrBhairava">+0.20</td>
-                </tr>
-                <tr>
-                    <td>Woodlands Khiladis</td>
-                    <td>4</td>
-                    <td>2</td>
-                    <td>2</td>
-                    <td>4</td>
-                    <td id="nrrKhiladis">-0.10</td>
-                </tr>
-                <tr>
-                    <td>Raging Bulls</td>
-                    <td>4</td>
-                    <td>2</td>
-                    <td>2</td>
-                    <td>4</td>
-                    <td id="nrrBulls">-0.50</td>
+                    <td>-0.2971</td>
                 </tr>
                 <tr>
                     <td>Toofan</td>
                     <td>4</td>
+                    <td>3</td>
+                    <td>1</td>
+                    <td>6</td>
+                    <td>0.4787</td>
+                </tr>
+                <tr>
+                    <td>Woodlands United</td>
+                    <td>4</td>
+                    <td>2</td>
+                    <td>2</td>
+                    <td>4</td>
+                    <td>0.9092</td>
+                </tr>
+                <tr>
+                    <td>Bhairava</td>
+                    <td>4</td>
+                    <td>2</td>
+                    <td>2</td>
+                    <td>4</td>
+                    <td>0.1158</td>
+                </tr>
+                <tr>
+                    <td>Woodlands Khiladis</td>
+                    <td>4</td>
                     <td>1</td>
                     <td>3</td>
                     <td>2</td>
-                    <td id="nrrToofan">-1.80</td>
+                    <td>-0.5558</td>
                 </tr>
                 <tr>
-                    <td>BBVS</td>
+                    <td>Raging Bulls</td>
                     <td>4</td>
-                    <td>0</td>
-                    <td>4</td>
-                    <td>0</td>
-                    <td id="nrrBBVS">-2.00</td>
+                    <td>1</td>
+                    <td>3</td>
+                    <td>2</td>
+                    <td>-0.7326</td>
                 </tr>
             </tbody>
         </table>
 
         <h2>Update NRR</h2>
-        <label for="teamSelect">Select Team:</label>
+        <label for="teamSelect">Select Your Team:</label>
         <select id="teamSelect">
-            <option value="Khiladis">Woodlands Khiladis</option>
-            <option value="Bulls">Raging Bulls</option>
-            <option value="Bhairava">Bhairava</option>
-            <option value="Woodlands">Woodlands United</option>
+            <option value="Top Guns">Top Guns</option>
             <option value="Toofan">Toofan</option>
-            <option value="BBVS">BBVS</option>
+            <option value="Woodlands United">Woodlands United</option>
+            <option value="Bhairava">Bhairava</option>
+            <option value="Woodlands Khiladis">Woodlands Khiladis</option>
+            <option value="Raging Bulls">Raging Bulls</option>
+        </select>
+
+        <label for="oppositionSelect">Select Opposition:</label>
+        <select id="oppositionSelect">
+            <option value="Top Guns">Top Guns</option>
+            <option value="Toofan">Toofan</option>
+            <option value="Woodlands United">Woodlands United</option>
+            <option value="Bhairava">Bhairava</option>
+            <option value="Woodlands Khiladis">Woodlands Khiladis</option>
+            <option value="Raging Bulls">Raging Bulls</option>
         </select>
 
         <div id="teamInputs" style="margin-top: 20px;">
@@ -99,24 +109,73 @@
             <label for="teamOversBowled">Total Overs Bowled:</label>
             <input type="number" id="teamOversBowled" step="0.1" required>
 
-            <button onclick="calculateSelectedTeamNRR()">Calculate NRR</button>
+            <button onclick="calculateMatchResult()">Calculate NRR & Update Points</button>
             <p id="result"></p>
         </div>
     </div>
 
     <script>
-        function calculateNRR(team) {
-            const runsScored = parseInt(document.getElementById(`team${team}RunsScored`).value);
-            const oversFaced = parseFloat(document.getElementById(`team${team}OversFaced`).value);
-            const runsConceded = parseInt(document.getElementById(`team${team}RunsConceded`).value);
-            const oversBowled = parseFloat(document.getElementById(`team${team}OversBowled`).value);
-            const nrr = ((runsScored / oversFaced) - (runsConceded / oversBowled)).toFixed(2);
-            document.getElementById(`result${team}`).innerText = `New NRR for ${team}: ${nrr}`;
+        function calculateNRR(runsScored, oversFaced, runsConceded, oversBowled) {
+            const runRateTeam = runsScored / oversFaced;
+            const runRateOpposition = runsConceded / oversBowled;
+            return (runRateTeam - runRateOpposition).toFixed(4);
         }
 
-        function calculateSelectedTeamNRR() {
-            const selectedTeam = document.getElementById('teamSelect').value;
-            calculateNRR(selectedTeam);
+        function calculateMatchResult() {
+            const team = document.getElementById('teamSelect').value;
+            const opposition = document.getElementById('oppositionSelect').value;
+
+            if (team === opposition) {
+                alert("You cannot select the same team as both your team and the opposition.");
+                return;
+            }
+
+            const runsScored = parseInt(document.getElementById('teamRunsScored').value);
+            const oversFaced = parseFloat(document.getElementById('teamOversFaced').value);
+            const runsConceded = parseInt(document.getElementById('teamRunsConceded').value);
+            const oversBowled = parseFloat(document.getElementById('teamOversBowled').value);
+
+            const nrr = calculateNRR(runsScored, oversFaced, runsConceded, oversBowled);
+
+            // Update points and matches played
+            const standings = document.getElementById('standingsBody').getElementsByTagName('tr');
+            let teamPoints, oppositionPoints, teamWins, oppositionWins;
+
+            for (let row of standings) {
+                if (row.cells[0].innerText === team) {
+                    teamPoints = parseInt(row.cells[4].innerText);
+                    teamWins = parseInt(row.cells[2].innerText);
+                    teamPoints += 2; // Add points for winning
+                    teamWins += 1; // Increment wins
+                    row.cells[2].innerText = teamWins; // Update wins
+                    row.cells[4].innerText = teamPoints; // Update points
+                }
+
+                if (row.cells[0].innerText === opposition) {
+                    oppositionPoints = parseInt(row.cells[4].innerText);
+                    oppositionPoints += 0; // No points for losing
+                    row.cells[4].innerText = oppositionPoints; // Update points
+                }
+            }
+
+            // Display the new NRR
+            document.getElementById('result').innerText = `New NRR for ${team}: ${nrr}`;
+            alert(`Match Result: ${team} won against ${opposition}.`);
+            sortStandings(); // Sort standings after updating points
+        }
+
+        function sortStandings() {
+            const table = document.getElementById("standingsBody");
+            const rows = Array.from(table.rows);
+            rows.sort((a, b) => {
+                return parseInt(b.cells[4].innerText) - parseInt(a.cells[4].innerText);
+            });
+            // Clear existing rows
+            while (table.firstChild) {
+                table.removeChild(table.firstChild);
+            }
+            // Append sorted rows
+            rows.forEach(row => table.appendChild(row));
         }
     </script>
 </body>
