@@ -8,7 +8,7 @@
 </head>
 <body>
     <h1>Current Standings</h1>
-    <table>
+    <table id="standings">
         <thead>
             <tr>
                 <th>Team</th>
@@ -19,32 +19,58 @@
                 <th>Net Run Rate (NRR)</th>
             </tr>
         </thead>
-        <tbody id="standings-body"></tbody>
+        <tbody>
+            <!-- Dynamic rows will be added here -->
+        </tbody>
     </table>
-    
+
     <h2>Update NRR</h2>
-    <div>
+    <div id="update-nrr">
         <h3>Your Team Input</h3>
-        <label for="your-team-dropdown">Select Your Team:</label>
-        <select id="your-team-dropdown"></select>
-        <label for="your-team-runs">Total Runs Scored:</label>
-        <input type="number" id="your-team-runs" />
-        <label for="your-team-overs">Total Overs Faced:</label>
-        <input type="number" step="0.1" id="your-team-overs" />
-    </div>
-    
-    <div>
+        <label for="your-team">Select Your Team:</label>
+        <select id="your-team">
+            <option value="">Select Team</option>
+            <option value="TOP GUNS">TOP GUNS</option>
+            <option value="TOOFAN">TOOFAN</option>
+            <option value="BHAIRAVA">BHAIRAVA</option>
+            <option value="WOODLANDS KHILADIS">WOODLANDS KHILADIS</option>
+            <option value="RAGING BULLS">RAGING BULLS</option>
+            <option value="WOODLANDS UNITED">WOODLANDS UNITED</option>
+        </select>
+        <br>
+
+        <label for="runs-scored">Total Runs Scored:</label>
+        <input type="number" id="runs-scored" required>
+        <br>
+
+        <label for="overs-faced">Total Overs Faced:</label>
+        <input type="number" id="overs-faced" required>
+        <br>
+
         <h3>Opponent Team Input</h3>
-        <label for="opponent-team-dropdown">Select Opposition:</label>
-        <select id="opponent-team-dropdown"></select>
-        <label for="opponent-team-runs">Opponent Team Score:</label>
-        <input type="number" id="opponent-team-runs" />
-        <label for="opponent-team-overs">Total Overs Bowled:</label>
-        <input type="number" step="0.1" id="opponent-team-overs" />
+        <label for="opposition">Select Opposition:</label>
+        <select id="opposition">
+            <option value="">Select Team</option>
+            <option value="TOP GUNS">TOP GUNS</option>
+            <option value="TOOFAN">TOOFAN</option>
+            <option value="BHAIRAVA">BHAIRAVA</option>
+            <option value="WOODLANDS KHILADIS">WOODLANDS KHILADIS</option>
+            <option value="RAGING BULLS">RAGING BULLS</option>
+            <option value="WOODLANDS UNITED">WOODLANDS UNITED</option>
+        </select>
+        <br>
+
+        <label for="opponent-score">Opponent Team Score:</label>
+        <input type="number" id="opponent-score" required>
+        <br>
+
+        <label for="overs-bowled">Total Overs Bowled:</label>
+        <input type="number" id="overs-bowled" required>
+        <br>
+
+        <button id="calculate-btn">Calculate NRR & Update Points</button>
     </div>
-    
-    <button id="calculate-btn">Calculate NRR & Update Points</button>
-    
+
     <script src="script.js"></script>
 </body>
 </html>
