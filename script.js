@@ -1,5 +1,5 @@
-// Initial team statistics
-const teamStats = {
+// Initialize team statistics
+let teamStats = {
     "TOOFAN": { matches: 4, won: 3, lost: 1, points: 6, forRuns: 576, againstRuns: 531 },
     "TOP GUNS": { matches: 4, won: 3, lost: 1, points: 6, forRuns: 596, againstRuns: 583 },
     "WOODLANDS UNITED": { matches: 4, won: 2, lost: 2, points: 4, forRuns: 562, againstRuns: 494 },
@@ -8,24 +8,44 @@ const teamStats = {
     "RAGING BULLS": { matches: 4, won: 1, lost: 3, points: 2, forRuns: 501, againstRuns: 524 },
 };
 
-// Function to calculate NRR
+// Populate team dropdowns
+const teamSelect1 = document.getElementById('team1');
+const teamSelect2 = document.getElementById('team2');
+
+Object.keys(teamStats).forEach(team => {
+    const option1 = document.createElement('option');
+    option1.value = team;
+    option1.textContent = team;
+    teamSelect1.appendChild(option1);
+    
+    const option2 = document.createElement('option');
+    option2.value = team;
+    option2.textContent = team;
+    teamSelect2.appendChild(option2);
+});
+
+// Function to calculate Net Run Rate (NRR)
 function calculateNRR(team) {
     const { forRuns, againstRuns, matches } = teamStats[team];
-    const totalOvers = matches * 25; // Assuming each match is 25 overs
-    const nrr = ((forRuns / totalOvers) - (againstRuns / totalOvers)).toFixed(4);
-    return nrr;
+    const totalOversFaced = matches * 25; // Assuming 25 overs for each match
+    const totalOversBowled = matches * 25;
+
+    const runRateFor = forRuns / totalOversFaced;
+    const runRateAgainst = againstRuns / totalOversBowled;
+
+    return (runRateFor - runRateAgainst).toFixed(4);
 }
 
 // Function to update team stats
 function updateTeamStats(winningTeam, losingTeam, winningScore, winningOvers, losingScore, losingOvers) {
-    // Update winning team
+    // Update winning team stats
     teamStats[winningTeam].matches++;
     teamStats[winningTeam].won++;
     teamStats[winningTeam].points += 2;
     teamStats[winningTeam].forRuns += winningScore;
     teamStats[winningTeam].againstRuns += losingScore;
 
-    // Update losing team
+    // Update losing team stats
     teamStats[losingTeam].matches++;
     teamStats[losingTeam].lost++;
     teamStats[losingTeam].forRuns += losingScore;
