@@ -151,9 +151,11 @@
                 }
 
                 if (row.cells[0].innerText === opposition) {
-                    let oppositionPoints = parseInt(row.cells[4].innerText);
-                    oppositionPoints += 0; // No points for losing
-                    row.cells[4].innerText = oppositionPoints; // Update points
+                    const matchesPlayed = parseInt(row.cells[1].innerText) + 1;
+                    row.cells[1].innerText = matchesPlayed; // Update matches played
+
+                    const updatedOppositionNRR = calculateNRR(parseInt(row.cells[5].innerText) * matchesPlayed, matchesPlayed, oppositionScore, oversBowled);
+                    row.cells[5].innerText = updatedOppositionNRR; // Update NRR for opposition
                 }
             }
 
