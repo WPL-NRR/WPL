@@ -4,11 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cricket NRR Dashboard</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <h1>Current Standings</h1>
-    <table id="standings">
+    <table id="standings-table">
         <thead>
             <tr>
                 <th>Team</th>
@@ -17,60 +17,162 @@
                 <th>Losses</th>
                 <th>Points</th>
                 <th>Net Run Rate (NRR)</th>
+                <th>For Runs</th>
+                <th>Against Runs</th>
             </tr>
         </thead>
         <tbody>
-            <!-- Dynamic rows will be added here -->
+        </tbody>
+    </table>
+
+    <h2>Match History</h2>
+    <table id="history-table">
+        <thead>
+            <tr>
+                <th>SNO</th>
+                <th>MATCH TYPE</th>
+                <th>DATE</th>
+                <th>Team ONE</th>
+                <th>TEAM TWO</th>
+                <th>RESULT</th>
+                <th>SCORE SUMMARY</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>1</td>
+                <td>League</td>
+                <td>09/29/2024</td>
+                <td>TOP GUNS</td>
+                <td>WOODLANDS KHILADIS</td>
+                <td>WOODLANDS KHILADIS won by 10 Wickets</td>
+                <td>TOP GUNS: 139/6(22.0) WOODLANDS KHILADIS: 140/4(15.5)</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>League</td>
+                <td>09/27/2024</td>
+                <td>TOOFAN</td>
+                <td>BHAIRAVA</td>
+                <td>TOOFAN won by 16 Run(s)</td>
+                <td>TOOFAN: 148/8(22.0) BHAIRAVA: 132/9(22.0)</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>League</td>
+                <td>09/27/2024</td>
+                <td>RAGING BULLS</td>
+                <td>WOODLANDS UNITED</td>
+                <td>WOODLANDS UNITED won by 12 Wickets</td>
+                <td>RAGING BULLS: 107/10(22.0) WOODLANDS UNITED: 109/2(19.1)</td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td>League</td>
+                <td>09/22/2024</td>
+                <td>RAGING BULLS</td>
+                <td>BHAIRAVA</td>
+                <td>BHAIRAVA won by 10 Wickets</td>
+                <td>RAGING BULLS: 122/11(22.0) BHAIRAVA: 124/4(17.5)</td>
+            </tr>
+            <tr>
+                <td>5</td>
+                <td>League</td>
+                <td>09/20/2024</td>
+                <td>TOP GUNS</td>
+                <td>TOOFAN</td>
+                <td>TOP GUNS won by 7 Run(s)</td>
+                <td>TOP GUNS: 151/11(24.2) TOOFAN: 144/7(25.0)</td>
+            </tr>
+            <tr>
+                <td>6</td>
+                <td>League</td>
+                <td>09/20/2024</td>
+                <td>WOODLANDS UNITED</td>
+                <td>WOODLANDS KHILADIS</td>
+                <td>WOODLANDS UNITED won by 68 Run(s)</td>
+                <td>WOODLANDS UNITED: 166/10(25.0) WOODLANDS KHILADIS: 98/11(20.3)</td>
+            </tr>
+            <tr>
+                <td>7</td>
+                <td>League</td>
+                <td>09/15/2024</td>
+                <td>TOOFAN</td>
+                <td>WOODLANDS UNITED</td>
+                <td>TOOFAN won by 1 Run(s)</td>
+                <td>TOOFAN: 130/10(22.0) WOODLANDS UNITED: 129/11(21.5)</td>
+            </tr>
+            <tr>
+                <td>8</td>
+                <td>League</td>
+                <td>09/13/2024</td>
+                <td>RAGING BULLS</td>
+                <td>WOODLANDS KHILADIS</td>
+                <td>RAGING BULLS won by 16 Run(s)</td>
+                <td>RAGING BULLS: 153/11(22.0) WOODLANDS KHILADIS: 137/11(20.3)</td>
+            </tr>
+            <tr>
+                <td>9</td>
+                <td>League</td>
+                <td>09/13/2024</td>
+                <td>TOP GUNS</td>
+                <td>BHAIRAVA</td>
+                <td>TOP GUNS won by 6 Run(s)</td>
+                <td>TOP GUNS: 147/9(22.0) BHAIRAVA: 141/10(21.5)</td>
+            </tr>
+            <tr>
+                <td>10</td>
+                <td>League</td>
+                <td>09/08/2024</td>
+                <td>BHAIRAVA</td>
+                <td>WOODLANDS KHILADIS</td>
+                <td>BHAIRAVA won by 4 Run(s)</td>
+                <td>BHAIRAVA: 130/11(21.0) WOODLANDS KHILADIS: 126/10(22.0)</td>
+            </tr>
+            <tr>
+                <td>11</td>
+                <td>League</td>
+                <td>09/06/2024</td>
+                <td>TOOFAN</td>
+                <td>RAGING BULLS</td>
+                <td>TOOFAN won by 35 Run(s)</td>
+                <td>TOOFAN: 154/10(25.0) RAGING BULLS: 119/11(22.0)</td>
+            </tr>
+            <tr>
+                <td>12</td>
+                <td>League</td>
+                <td>09/06/2024</td>
+                <td>TOP GUNS</td>
+                <td>WOODLANDS UNITED</td>
+                <td>TOP GUNS won by 1 Run(s)</td>
+                <td>TOP GUNS: 159/9(25.0) WOODLANDS UNITED: 158/9(25.0)</td>
+            </tr>
         </tbody>
     </table>
 
     <h2>Update NRR</h2>
-    <div id="update-nrr">
+    <div>
         <h3>Your Team Input</h3>
         <label for="your-team">Select Your Team:</label>
-        <select id="your-team">
-            <option value="">Select Team</option>
-            <option value="TOP GUNS">TOP GUNS</option>
-            <option value="TOOFAN">TOOFAN</option>
-            <option value="BHAIRAVA">BHAIRAVA</option>
-            <option value="WOODLANDS KHILADIS">WOODLANDS KHILADIS</option>
-            <option value="RAGING BULLS">RAGING BULLS</option>
-            <option value="WOODLANDS UNITED">WOODLANDS UNITED</option>
-        </select>
-        <br>
-
-        <label for="runs-scored">Total Runs Scored:</label>
-        <input type="number" id="runs-scored" required>
-        <br>
-
-        <label for="overs-faced">Total Overs Faced:</label>
-        <input type="number" id="overs-faced" required>
-        <br>
-
-        <h3>Opponent Team Input</h3>
-        <label for="opposition">Select Opposition:</label>
-        <select id="opposition">
-            <option value="">Select Team</option>
-            <option value="TOP GUNS">TOP GUNS</option>
-            <option value="TOOFAN">TOOFAN</option>
-            <option value="BHAIRAVA">BHAIRAVA</option>
-            <option value="WOODLANDS KHILADIS">WOODLANDS KHILADIS</option>
-            <option value="RAGING BULLS">RAGING BULLS</option>
-            <option value="WOODLANDS UNITED">WOODLANDS UNITED</option>
-        </select>
-        <br>
-
-        <label for="opponent-score">Opponent Team Score:</label>
-        <input type="number" id="opponent-score" required>
-        <br>
-
-        <label for="overs-bowled">Total Overs Bowled:</label>
-        <input type="number" id="overs-bowled" required>
-        <br>
-
-        <button id="calculate-btn">Calculate NRR & Update Points</button>
+        <select id="your-team"></select>
+        <label for="your-runs">Total Runs Scored:</label>
+        <input type="number" id="your-runs">
+        <label for="your-overs">Total Overs Faced:</label>
+        <input type="number" id="your-overs">
     </div>
 
+    <div>
+        <h3>Opponent Team Input</h3>
+        <label for="opponent-team">Select Opposition:</label>
+        <select id="opponent-team"></select>
+        <label for="opponent-score">Opposition Team Score:</label>
+        <input type="number" id="opponent-score">
+        <label for="opponent-overs">Total Overs Bowled:</label>
+        <input type="number" id="opponent-overs">
+    </div>
+
+    <button id="calculate-btn">Calculate NRR & Update Points</button>
+    
     <script src="script.js"></script>
 </body>
 </html>
