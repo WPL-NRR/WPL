@@ -1,18 +1,4 @@
-let previousMatches = [
-    {team1: "TOP GUNS", team2: "WOODLANDS KHILADIS", result: "WOODLANDS KHILADIS", score1: "139", overs1: 22, score2: "140", overs2: 15.5},
-    {team1: "TOOFAN", team2: "BHAIRAVA", result: "TOOFAN", score1: "148", overs1: 22, score2: "132", overs2: 22},
-    {team1: "RAGING BULLS", team2: "WOODLANDS UNITED", result: "WOODLANDS UNITED", score1: "107", overs1: 22, score2: "109", overs2: 19.1},
-    {team1: "RAGING BULLS", team2: "BHAIRAVA", result: "BHAIRAVA", score1: "122", overs1: 22, score2: "124", overs2: 17.5},
-    {team1: "TOP GUNS", team2: "TOOFAN", result: "TOP GUNS", score1: "151", overs1: 24.2, score2: "144", overs2: 25},
-    {team1: "WOODLANDS UNITED", team2: "WOODLANDS KHILADIS", result: "WOODLANDS UNITED", score1: "166", overs1: 25, score2: "98", overs2: 20.3},
-    {team1: "TOOFAN", team2: "WOODLANDS UNITED", result: "TOOFAN", score1: "130", overs1: 22, score2: "129", overs2: 21.5},
-    {team1: "RAGING BULLS", team2: "WOODLANDS KHILADIS", result: "RAGING BULLS", score1: "153", overs1: 22, score2: "137", overs2: 20.3},
-    {team1: "TOP GUNS", team2: "BHAIRAVA", result: "TOP GUNS", score1: "147", overs1: 22, score2: "141", overs2: 21.5},
-    {team1: "BHAIRAVA", team2: "WOODLANDS KHILADIS", result: "BHAIRAVA", score1: "130", overs1: 21, score2:Here’s the updated `script.js` that includes the previous match results to calculate the Net Run Rate (NRR) based on the inputs you provide, along with handling the issue of selecting the same team for both the team and opposition.
-
-### Updated `script.js`
-
-```javascript
+// script.js
 let previousMatches = [
     {team1: "TOP GUNS", team2: "WOODLANDS KHILADIS", result: "WOODLANDS KHILADIS", score1: 139, overs1: 22, score2: 140, overs2: 15.5},
     {team1: "TOOFAN", team2: "BHAIRAVA", result: "TOOFAN", score1: 148, overs1: 22, score2: 132, overs2: 22},
@@ -26,13 +12,13 @@ let previousMatches = [
     {team1: "BHAIRAVA", team2: "WOODLANDS KHILADIS", result: "BHAIRAVA", score1: 130, overs1: 21, score2: 126, overs2: 22}
 ];
 
-const calculateNRR = (team, matches) => {
+const calculateNRR = (team) => {
     let totalRunsScored = 0;
     let totalOversFaced = 0;
     let totalRunsConceded = 0;
     let totalOversBowled = 0;
 
-    matches.forEach(match => {
+    previousMatches.forEach(match => {
         if (match.team1 === team) {
             totalRunsScored += match.score1;
             totalOversFaced += match.overs1;
@@ -46,8 +32,7 @@ const calculateNRR = (team, matches) => {
         }
     });
 
-    let nrr = ((totalRunsScored / totalOversFaced) - (totalRunsConceded / totalOversBowled)) || 0;
-    return nrr.toFixed(4);
+    return ((totalRunsScored / totalOversFaced) - (totalRunsConceded / totalOversBowled)).toFixed(4) || 0;
 };
 
 const calculateMatchResult = () => {
@@ -75,20 +60,20 @@ const calculateMatchResult = () => {
 
     previousMatches.push(newMatch);
     
-    const nrr = calculateNRR(team, previousMatches);
+    const nrr = calculateNRR(team);
     document.getElementById("result").innerText = `Updated NRR for ${team} is ${nrr}`;
 
-    // Optionally, you can display updated standings here.
+    // Refresh the standings
+    updateStandings();
 };
 
-// Initial calculation for existing teams
-const initialNRRDisplay = () => {
+const updateStandings = () => {
     const standingsBody = document.getElementById("standingsBody");
     standingsBody.innerHTML = ""; // Clear existing rows
 
-    const teams = ["Top Guns", "Toofan", "Woodlands United", "Bhairava", "Woodlands Khiladis", "Raging Bulls"];
+    const teams = ["TOP GUNS", "TOOFAN", "WOODLANDS UNITED", "BHAIRAVA", "WOODLANDS KHILADIS", "RAGING BULLS"];
     teams.forEach(team => {
-        const nrr = calculateNRR(team, previousMatches);
+        const nrr = calculateNRR(team);
         standingsBody.innerHTML += `
             <tr>
                 <td>${team}</td>
@@ -102,4 +87,5 @@ const initialNRRDisplay = () => {
     });
 };
 
-initialNRRDisplay();
+// Initial calculation for existing teams
+updateStandings();
