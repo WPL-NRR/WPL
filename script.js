@@ -1,25 +1,9 @@
+// script.js
+
 function calculateNRR(runsScored, oversFaced, oppositionScore, oversBowled) {
     const runRateTeam = runsScored / oversFaced;
     const runRateOpposition = oppositionScore / oversBowled;
     return (runRateTeam - runRateOpposition).toFixed(4);
-}
-
-function updateOpponentOptions() {
-    const team = document.getElementById('teamSelect').value;
-    const oppositionSelect = document.getElementById('oppositionSelect');
-
-    // Get all options
-    const options = Array.from(oppositionSelect.options);
-
-    // Enable or disable options based on the selected team
-    options.forEach(option => {
-        option.disabled = option.value === team; // Disable the selected team
-    });
-
-    // Reset the opponent selection if the currently selected option is disabled
-    if (oppositionSelect.value === team) {
-        oppositionSelect.value = options[0].value; // Select the first available option
-    }
 }
 
 function calculateMatchResult() {
@@ -40,7 +24,6 @@ function calculateMatchResult() {
 
     // Update points and matches played
     const standings = document.getElementById('standingsBody').getElementsByTagName('tr');
-    let matchSummary = `${team} vs ${opposition}: ${team} ${runsScored}/${oversFaced} | ${opposition} ${oppositionScore}/${oversBowled}`;
 
     for (let row of standings) {
         if (row.cells[0].innerText === team) {
@@ -54,9 +37,9 @@ function calculateMatchResult() {
         if (row.cells[0].innerText === opposition) {
             const matchesPlayed = parseInt(row.cells[1].innerText) + 1;
             row.cells[1].innerText = matchesPlayed; // Update matches played
-
+            
             const updatedOppositionNRR = calculateNRR(
-                parseInt(row.cells[5].innerText) * (matchesPlayed - 1) + oppositionScore,
+                parseFloat(row.cells[5].innerText) * (matchesPlayed - 1) + oppositionScore,
                 matchesPlayed,
                 oppositionScore,
                 oversBowled
@@ -65,34 +48,12 @@ function calculateMatchResult() {
         }
     }
 
-    // Add match history
-    addMatchToHistory(matchSummary);
-
     // Display the new NRR
     document.getElementById('result').innerText = `New NRR for ${team}: ${nrr}`;
     alert(`Match Result: ${team} won against ${opposition}.`);
     sortStandings(); // Sort standings after updating points
 }
 
-function addMatchToHistory(summary) {
-    const matchHistoryBody = document.getElementById('matchHistoryBody');
-    const newRow = matchHistoryBody.insertRow();
-
-    const cellMatch = newRow.insertCell(0);
-    const cellWinner = newRow.insertCell(1);
-    const cellSummary = newRow.insertCell(2);
-    
-    cellMatch.innerText = summary;
-    cellWinner.innerText = summary.split(':')[0]; // Extract winner's name
-    cellSummary.innerText = summary;
-}
-
-function sortStandings() {
-    const tableHere's the completion of the `script.js` file and the final version of `styles.css`.
-
-### `script.js` (continued)
-
-```javascript
 function sortStandings() {
     const table = document.getElementById("standingsBody");
     const rows = Array.from(table.rows);
