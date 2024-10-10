@@ -4,38 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cricket Team Stats</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 20px 0;
-        }
-        th, td {
-            border: 1px solid #ddd;
-            padding: 8px;
-            text-align: center;
-        }
-        th {
-            background-color: #f2f2f2;
-        }
-        tr:nth-child(even) {
-            background-color: #f9f9f9;
-        }
-        tr:hover {
-            background-color: #ddd;
-        }
-        form {
-            margin: 20px 0;
-        }
-        label {
-            display: block;
-            margin: 10px 0 5px;
-        }
-    </style>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
@@ -100,7 +69,7 @@
         <tr>
             <td>1</td>
             <td>TOOFAN</td>
-            <td>5</td>
+            <td>4</td>
             <td>3</td>
             <td>1</td>
             <td>6.0</td>
@@ -112,9 +81,9 @@
         <tr>
             <td>2</td>
             <td>WOODLANDS UNITED</td>
-            <td>5</td>
+            <td>4</td>
             <td>2</td>
-            <td>3</td>
+            <td>2</td>
             <td>4.0</td>
             <td>50.00%</td>
             <td>0.36</td>
@@ -124,11 +93,11 @@
         <tr>
             <td>3</td>
             <td>TOP GUNS</td>
-            <td>5</td>
+            <td>4</td>
             <td>3</td>
-            <td>2</td>
+            <td>1</td>
             <td>6.0</td>
-            <td>60.00%</td>
+            <td>75.00%</td>
             <td>-0.84</td>
             <td>596/94.0</td>
             <td>583/87.5</td>
@@ -136,9 +105,9 @@
         <tr>
             <td>4</td>
             <td>BHAIRAVA</td>
-            <td>5</td>
+            <td>4</td>
             <td>2</td>
-            <td>3</td>
+            <td>2</td>
             <td>4.0</td>
             <td>50.00%</td>
             <td>-0.27</td>
@@ -148,9 +117,9 @@
         <tr>
             <td>5</td>
             <td>RAGING BULLS</td>
-            <td>5</td>
-            <td>1</td>
             <td>4</td>
+            <td>1</td>
+            <td>3</td>
             <td>2.0</td>
             <td>25.00%</td>
             <td>-0.28</td>
@@ -160,9 +129,9 @@
         <tr>
             <td>6</td>
             <td>WOODLANDS KHILADIS</td>
-            <td>5</td>
-            <td>1</td>
             <td>4</td>
+            <td>1</td>
+            <td>3</td>
             <td>2.0</td>
             <td>25.00%</td>
             <td>-0.35</td>
@@ -172,58 +141,7 @@
     </tbody>
 </table>
 
-<script>
-    document.getElementById('scoreForm').addEventListener('submit', function(e) {
-        e.preventDefault(); // Prevent default form submission
-
-        const team1 = document.getElementById('team1').value;
-        const team1Score = parseInt(document.getElementById('team1Score').value);
-        const team1Overs = parseFloat(document.getElementById('team1Overs').value);
-
-        const team2 = document.getElementById('team2').value;
-        const team2Score = parseInt(document.getElementById('team2Score').value);
-        const team2Overs = parseFloat(document.getElementById('team2Overs').value);
-
-        // Here you can update the relevant team's data and calculate NRR
-        updateTeamStats(team1, team1Score, team1Overs);
-        updateTeamStats(team2, team2Score, team2Overs);
-
-        // Reset form
-        document.getElementById('scoreForm').reset();
-    });
-
-    function updateTeamStats(team, score, overs) {
-        const rows = document.querySelectorAll('#teamStats tr');
-
-        rows.forEach(row => {
-            const cells = row.getElementsByTagName('td');
-            if (cells[1].textContent === team) {
-                // Update total runs and overs for the team
-                const oldFor = cells[8].textContent.split('/')[0]; // Runs scored
-                const oldAgainst = cells[9].textContent.split('/')[0]; // Runs conceded
-                const oldMat = parseInt(cells[2].textContent); // Matches played
-
-                // Update values
-                const newFor = parseInt(oldFor) + score;
-                const newAgainst = parseInt(oldAgainst) + (team === 'TOOFAN' ? team2Score : team1Score); // Assuming the opponent's score is added to against
-                const newMat = oldMat + 1; // Increase matches played
-
-                // Update the cells
-                cells[8].textContent = `${newFor}/${newMat * 22.0}`; // Assuming 22 overs per match
-                cells[9].textContent = `${newAgainst}/${newMat * 22.0}`; // Assuming 22 overs per match
-
-                // Calculate NRR
-                const newNetRR = ((newFor - newAgainst) / newMat) / 22.0; // Net RR calculation
-                cells[7].textContent = newNetRR.toFixed(2); // Update Net RR
-
-                // Update matches played
-                cells[2].textContent = newMat; // Update matches played
-            }
-        });
-
-        // Here, you may want to re-sort the table based on the updated NRR
-    }
-</script>
+<script src="script.js"></script>
 
 </body>
 </html>
