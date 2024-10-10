@@ -3,32 +3,54 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Net Run Rate Calculator</title>
-    <link rel="stylesheet" href="styles.css"> <!-- Linking to a CSS file -->
+    <title>Cricket Team NRR Predictor</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="container">
-        <h1>Net Run Rate (NRR) Calculator</h1>
+        <h1>Cricket Team NRR Predictor</h1>
+        
+        <div id="teamInputs">
+            <div class="team-input">
+                <h3>Woodlands Khiladis</h3>
+                <label for="teamKhiladisRunsScored">Total Runs Scored:</label>
+                <input type="number" id="teamKhiladisRunsScored" required>
 
-        <form id="nrrForm">
-            <label for="runsScored">Total Runs Scored:</label>
-            <input type="number" id="runsScored" name="runsScored" required><br>
+                <label for="teamKhiladisOversFaced">Total Overs Faced:</label>
+                <input type="number" id="teamKhiladisOversFaced" step="0.1" required>
 
-            <label for="oversFaced">Total Overs Faced:</label>
-            <input type="number" id="oversFaced" name="oversFaced" step="0.1" required><br>
+                <label for="teamKhiladisRunsConceded">Total Runs Conceded:</label>
+                <input type="number" id="teamKhiladisRunsConceded" required>
 
-            <label for="runsConceded">Total Runs Conceded:</label>
-            <input type="number" id="runsConceded" name="runsConceded" required><br>
+                <label for="teamKhiladisOversBowled">Total Overs Bowled:</label>
+                <input type="number" id="teamKhiladisOversBowled" step="0.1" required>
 
-            <label for="oversBowled">Total Overs Bowled:</label>
-            <input type="number" id="oversBowled" name="oversBowled" step="0.1" required><br>
+                <button onclick="calculateNRR('Khiladis')">Calculate NRR for Woodlands Khiladis</button>
+                <p id="resultKhiladis"></p>
+            </div>
 
-            <button type="submit">Calculate NRR</button>
-        </form>
+            <div class="team-input">
+                <h3>Raging Bulls</h3>
+                <label for="teamBullsRunsScored">Total Runs Scored:</label>
+                <input type="number" id="teamBullsRunsScored" required>
 
-        <p id="result"></p>
+                <label for="teamBullsOversFaced">Total Overs Faced:</label>
+                <input type="number" id="teamBullsOversFaced" step="0.1" required>
+
+                <label for="teamBullsRunsConceded">Total Runs Conceded:</label>
+                <input type="number" id="teamBullsRunsConceded" required>
+
+                <label for="teamBullsOversBowled">Total Overs Bowled:</label>
+                <input type="number" id="teamBullsOversBowled" step="0.1" required>
+
+                <button onclick="calculateNRR('Bulls')">Calculate NRR for Raging Bulls</button>
+                <p id="resultBulls"></p>
+            </div>
+
+            <!-- Repeat for additional teams as needed -->
+        </div>
     </div>
 
-    <script src="script.js"></script> <!-- Linking to JavaScript file -->
+    <script src="script.js"></script>
 </body>
 </html>
