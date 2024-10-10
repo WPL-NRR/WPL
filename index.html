@@ -78,7 +78,7 @@
         <div id="matchInput">
             <h3>Your Team Input</h3>
             <label for="teamSelect">Select Your Team:</label>
-            <select id="teamSelect">
+            <select id="teamSelect" onchange="updateOpponentOptions()">
                 <option value="Top Guns">Top Guns</option>
                 <option value="Toofan">Toofan</option>
                 <option value="Woodlands United">Woodlands United</option>
@@ -108,10 +108,24 @@
             <label for="oppositionOversBowled">Total Overs Bowled:</label>
             <input type="number" id="oppositionOversBowled" step="0.1" required>
 
-            <button id="calculateButton">Calculate NRR & Update Points</button>
+            <button onclick="calculateMatchResult()">Calculate NRR & Update Points</button>
             <p id="result"></p>
         </div>
+
+        <h2>Match History</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Match Summary</th>
+                    <th>Winner</th>
+                    <th>Details</th>
+                </tr>
+            </thead>
+            <tbody id="matchHistoryBody">
+            </tbody>
+        </table>
     </div>
+
     <script src="script.js"></script>
 </body>
 </html>
