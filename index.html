@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Net Run Rate Calculator</title>
+    <link rel="stylesheet" href="styles.css"> <!-- Linking to a CSS file -->
+</head>
+<body>
+    <div class="container">
+        <h1>Net Run Rate (NRR) Calculator</h1>
+
+        <form id="nrrForm">
+            <label for="runsScored">Total Runs Scored:</label>
+            <input type="number" id="runsScored" name="runsScored" required><br>
+
+            <label for="oversFaced">Total Overs Faced:</label>
+            <input type="number" id="oversFaced" name="oversFaced" step="0.1" required><br>
+
+            <label for="runsConceded">Total Runs Conceded:</label>
+            <input type="number" id="runsConceded" name="runsConceded" required><br>
+
+            <label for="oversBowled">Total Overs Bowled:</label>
+            <input type="number" id="oversBowled" name="oversBowled" step="0.1" required><br>
+
+            <button type="submit">Calculate NRR</button>
+        </form>
+
+        <p id="result"></p>
+    </div>
+
+    <script src="script.js"></script> <!-- Linking to JavaScript file -->
+</body>
+</html>
