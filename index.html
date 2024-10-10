@@ -11,44 +11,6 @@
         <h1>Cricket Team NRR Predictor</h1>
         
         <div id="teamInputs">
-            <!-- Woodlands United -->
-            <div class="team-input">
-                <h3>Woodlands United</h3>
-                <label for="teamWoodlandsRunsScored">Total Runs Scored:</label>
-                <input type="number" id="teamWoodlandsRunsScored" required>
-
-                <label for="teamWoodlandsOversFaced">Total Overs Faced:</label>
-                <input type="number" id="teamWoodlandsOversFaced" step="0.1" required>
-
-                <label for="teamWoodlandsRunsConceded">Total Runs Conceded:</label>
-                <input type="number" id="teamWoodlandsRunsConceded" required>
-
-                <label for="teamWoodlandsOversBowled">Total Overs Bowled:</label>
-                <input type="number" id="teamWoodlandsOversBowled" step="0.1" required>
-
-                <button onclick="calculateNRR('Woodlands')">Calculate NRR</button>
-                <p id="resultWoodlands"></p>
-            </div>
-
-            <!-- Bhairava -->
-            <div class="team-input">
-                <h3>Bhairava</h3>
-                <label for="teamBhairavaRunsScored">Total Runs Scored:</label>
-                <input type="number" id="teamBhairavaRunsScored" required>
-
-                <label for="teamBhairavaOversFaced">Total Overs Faced:</label>
-                <input type="number" id="teamBhairavaOversFaced" step="0.1" required>
-
-                <label for="teamBhairavaRunsConceded">Total Runs Conceded:</label>
-                <input type="number" id="teamBhairavaRunsConceded" required>
-
-                <label for="teamBhairavaOversBowled">Total Overs Bowled:</label>
-                <input type="number" id="teamBhairavaOversBowled" step="0.1" required>
-
-                <button onclick="calculateNRR('Bhairava')">Calculate NRR</button>
-                <p id="resultBhairava"></p>
-            </div>
-
             <!-- Woodlands Khiladis -->
             <div class="team-input">
                 <h3>Woodlands Khiladis</h3>
@@ -87,6 +49,44 @@
                 <p id="resultBulls"></p>
             </div>
 
+            <!-- Bhairava -->
+            <div class="team-input">
+                <h3>Bhairava</h3>
+                <label for="teamBhairavaRunsScored">Total Runs Scored:</label>
+                <input type="number" id="teamBhairavaRunsScored" required>
+
+                <label for="teamBhairavaOversFaced">Total Overs Faced:</label>
+                <input type="number" id="teamBhairavaOversFaced" step="0.1" required>
+
+                <label for="teamBhairavaRunsConceded">Total Runs Conceded:</label>
+                <input type="number" id="teamBhairavaRunsConceded" required>
+
+                <label for="teamBhairavaOversBowled">Total Overs Bowled:</label>
+                <input type="number" id="teamBhairavaOversBowled" step="0.1" required>
+
+                <button onclick="calculateNRR('Bhairava')">Calculate NRR</button>
+                <p id="resultBhairava"></p>
+            </div>
+
+            <!-- Woodlands United -->
+            <div class="team-input">
+                <h3>Woodlands United</h3>
+                <label for="teamWoodlandsRunsScored">Total Runs Scored:</label>
+                <input type="number" id="teamWoodlandsRunsScored" required>
+
+                <label for="teamWoodlandsOversFaced">Total Overs Faced:</label>
+                <input type="number" id="teamWoodlandsOversFaced" step="0.1" required>
+
+                <label for="teamWoodlandsRunsConceded">Total Runs Conceded:</label>
+                <input type="number" id="teamWoodlandsRunsConceded" required>
+
+                <label for="teamWoodlandsOversBowled">Total Overs Bowled:</label>
+                <input type="number" id="teamWoodlandsOversBowled" step="0.1" required>
+
+                <button onclick="calculateNRR('Woodlands')">Calculate NRR</button>
+                <p id="resultWoodlands"></p>
+            </div>
+
             <!-- BBVS -->
             <div class="team-input">
                 <h3>BBVS</h3>
@@ -105,10 +105,29 @@
                 <button onclick="calculateNRR('BBVS')">Calculate NRR</button>
                 <p id="resultBBVS"></p>
             </div>
+
+            <!-- Toofan -->
+            <div class="team-input">
+                <h3>Toofan</h3>
+                <label for="teamToofanRunsScored">Total Runs Scored:</label>
+                <input type="number" id="teamToofanRunsScored" required>
+
+                <label for="teamToofanOversFaced">Total Overs Faced:</label>
+                <input type="number" id="teamToofanOversFaced" step="0.1" required>
+
+                <label for="teamToofanRunsConceded">Total Runs Conceded:</label>
+                <input type="number" id="teamToofanRunsConceded" required>
+
+                <label for="teamToofanOversBowled">Total Overs Bowled:</label>
+                <input type="number" id="teamToofanOversBowled" step="0.1" required>
+
+                <button onclick="calculateNRR('Toofan')">Calculate NRR</button>
+                <p id="resultToofan"></p>
+            </div>
         </div>
 
-        <h2>Updated Standings</h2>
-        <table id="standings">
+        <h2>Current Standings</h2>
+        <table>
             <thead>
                 <tr>
                     <th>Team</th>
@@ -121,49 +140,23 @@
             </thead>
             <tbody id="standingsBody">
                 <tr>
-                    <td>Woodlands United</td>
-                    <td>2</td>
-                    <td>2</td>
-                    <td>0</td>
-                    <td>4</td>
-                    <td id="nrrWoodlands">4.1</td>
-                </tr>
-                <tr>
-                    <td>Bhairava</td>
-                    <td>3</td>
-                    <td>2</td>
-                    <td>1</td>
-                    <td>4</td>
-                    <td id="nrrBhairava">1.2</td>
-                </tr>
-                <tr>
                     <td>Woodlands Khiladis</td>
+                    <td>4</td>
                     <td>2</td>
-                    <td>1</td>
-                    <td>1</td>
                     <td>2</td>
-                    <td id="nrrKhiladis">-0.5</td>
+                    <td>4</td>
+                    <td id="nrrKhiladis">-0.10</td>
                 </tr>
                 <tr>
                     <td>Raging Bulls</td>
+                    <td>4</td>
                     <td>2</td>
-                    <td>1</td>
-                    <td>1</td>
                     <td>2</td>
-                    <td id="nrrBulls">-1.3</td>
+                    <td>4</td>
+                    <td id="nrrBulls">-0.50</td>
                 </tr>
                 <tr>
-                    <td>BBVS</td>
+                    <td>Bhairava</td>
+                    <td>4</td>
                     <td>3</td>
-                    <td>0</td>
-                    <td>3</td>
-                    <td>0</td>
-                    <td id="nrrBBVS">-4.5</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-
-    <script src="script.js"></script>
-</body>
-</html>
+                    <td>1</td
