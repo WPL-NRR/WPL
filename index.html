@@ -3,44 +3,48 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cricket NRR Calculator</title>
+    <title>Cricket NRR Dashboard</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <h1>Current Standings</h1>
-    <table id="standings">
-        <tr>
-            <th>Team</th>
-            <th>Matches Played</th>
-            <th>Wins</th>
-            <th>Losses</th>
-            <th>Points</th>
-            <th>Net Run Rate (NRR)</th>
-        </tr>
+    <table>
+        <thead>
+            <tr>
+                <th>Team</th>
+                <th>Matches Played</th>
+                <th>Wins</th>
+                <th>Losses</th>
+                <th>Points</th>
+                <th>Net Run Rate (NRR)</th>
+            </tr>
+        </thead>
+        <tbody id="standings-body"></tbody>
     </table>
-
+    
     <h2>Update NRR</h2>
-    <h3>Your Team Input</h3>
-    <label for="yourTeam">Select Your Team:</label>
-    <select id="yourTeam"></select>
-    <br>
-    <label for="yourRuns">Total Runs Scored:</label>
-    <input type="number" id="yourRuns" required>
-    <br>
-    <label for="yourOvers">Total Overs Faced:</label>
-    <input type="number" step="0.1" id="yourOvers" required>
-    <h3>Opponent Team Input</h3>
-    <label for="opponentTeam">Select Opposition:</label>
-    <select id="opponentTeam"></select>
-    <br>
-    <label for="opponentRuns">Total Runs Scored:</label>
-    <input type="number" id="opponentRuns" required>
-    <br>
-    <label for="opponentOvers">Total Overs Faced:</label>
-    <input type="number" step="0.1" id="opponentOvers" required>
-    <br>
-    <button id="calculateButton">Calculate NRR</button>
-
+    <div>
+        <h3>Your Team Input</h3>
+        <label for="your-team-dropdown">Select Your Team:</label>
+        <select id="your-team-dropdown"></select>
+        <label for="your-team-runs">Total Runs Scored:</label>
+        <input type="number" id="your-team-runs" />
+        <label for="your-team-overs">Total Overs Faced:</label>
+        <input type="number" step="0.1" id="your-team-overs" />
+    </div>
+    
+    <div>
+        <h3>Opponent Team Input</h3>
+        <label for="opponent-team-dropdown">Select Opposition:</label>
+        <select id="opponent-team-dropdown"></select>
+        <label for="opponent-team-runs">Opponent Team Score:</label>
+        <input type="number" id="opponent-team-runs" />
+        <label for="opponent-team-overs">Total Overs Bowled:</label>
+        <input type="number" step="0.1" id="opponent-team-overs" />
+    </div>
+    
+    <button id="calculate-btn">Calculate NRR & Update Points</button>
+    
     <script src="script.js"></script>
 </body>
 </html>
