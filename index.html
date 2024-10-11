@@ -3,86 +3,87 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cricket Team Statistics</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-        }
-        table {
-            border-collapse: collapse;
-            width: 100%;
-            margin-top: 20px;
-        }
-        th, td {
-            border: 1px solid #ddd;
-            padding: 8px;
-            text-align: center;
-        }
-        th {
-            background-color: #f2f2f2;
-        }
-        form {
-            margin-bottom: 20px;
-        }
-    </style>
+    <title>Cricket Tournament Dashboard</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <div class="container">
+        <h1>Cricket Tournament Dashboard</h1>
 
-<h1>Cricket Team Statistics</h1>
+        <table id="teamStats">
+            <thead>
+                <tr>
+                    <th>S.No</th>
+                    <th>Team</th>
+                    <th>Mat</th>
+                    <th>Won</th>
+                    <th>Lost</th>
+                    <th>Pts</th>
+                    <th>Win%</th>
+                    <th>Net RR</th>
+                    <th>For</th>
+                    <th>Against</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>TOOFAN</td>
+                    <td class="mat">4</td>
+                    <td class="won">3</td>
+                    <td class="lost">1</td>
+                    <td class="pts">6</td>
+                    <td class="winPercent">75.00%</td>
+                    <td class="netRR">0.4500</td>
+                    <td class="for">576</td>
+                    <td class="against">531</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>WOODLANDS KHILADIS</td>
+                    <td class="mat">4</td>
+                    <td class="won">1</td>
+                    <td class="lost">3</td>
+                    <td class="pts">2</td>
+                    <td class="winPercent">25.00%</td>
+                    <td class="netRR">-0.8700</td>
+                    <td class="for">501</td>
+                    <td class="against">588</td>
+                </tr>
+                <!-- Add other teams here -->
+            </tbody>
+        </table>
 
-<h2>Current Stats</h2>
-<table>
-    <thead>
-        <tr>
-            <th>SNO</th>
-            <th>TEAM</th>
-            <th>MAT</th>
-            <th>WON</th>
-            <th>LOST</th>
-            <th>PTS</th>
-            <th>WIN%</th>
-            <th>NET RR</th>
-            <th>FOR</th>
-            <th>AGAINST</th>
-        </tr>
-    </thead>
-    <tbody id="teamStatsCurrent"></tbody>
-</table>
+        <h2>Input Match Result</h2>
+        <form id="matchForm">
+            <label for="teamOne">Select Team One:</label>
+            <select id="teamOne" required>
+                <option value="TOOFAN">TOOFAN</option>
+                <option value="WOODLANDS KHILADIS">WOODLANDS KHILADIS</option>
+                <!-- Add other teams here -->
+            </select>
+            <label for="scoreOne">Score:</label>
+            <input type="number" id="scoreOne" required>
 
-<h2>Update Match Result</h2>
-<form id="scoreForm">
-    <label for="team1">Select Team 1:</label>
-    <select id="team1"></select>
-    <label for="team1Score">Score:</label>
-    <input type="number" id="team1Score" required>
-    
-    <label for="team2">Select Team 2:</label>
-    <select id="team2"></select>
-    <label for="team2Score">Score:</label>
-    <input type="number" id="team2Score" required>
+            <label for="oversOne">Overs:</label>
+            <input type="number" id="oversOne" required>
 
-    <button type="submit">Submit Match Result</button>
-</form>
+            <label for="teamTwo">Select Team Two:</label>
+            <select id="teamTwo" required>
+                <option value="WOODLANDS KHILADIS">WOODLANDS KHILADIS</option>
+                <option value="TOOFAN">TOOFAN</option>
+                <!-- Add other teams here -->
+            </select>
+            <label for="scoreTwo">Score:</label>
+            <input type="number" id="scoreTwo" required>
 
-<table>
-    <thead>
-        <tr>
-            <th>SNO</th>
-            <th>TEAM</th>
-            <th>MAT</th>
-            <th>WON</th>
-            <th>LOST</th>
-            <th>PTS</th>
-            <th>WIN%</th>
-            <th>NET RR</th>
-            <th>FOR</th>
-            <th>AGAINST</th>
-        </tr>
-    </thead>
-    <tbody id="teamStats"></tbody>
-</table>
+            <label for="oversTwo">Overs:</label>
+            <input type="number" id="oversTwo" required>
 
-<script src="script.js"></script>
+            <button type="submit">Submit Match Result</button>
+        </form>
+    </div>
+
+    <script src="script.js"></script>
 </body>
 </html>
