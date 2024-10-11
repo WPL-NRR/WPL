@@ -47,39 +47,6 @@ function updateTeamStats() {
     });
 }
 
-// Function to calculate win probabilities
-function calculateWinProbabilities() {
-    const probabilityTable = document.querySelector("#probabilityTable tbody");
-    probabilityTable.innerHTML = ""; // Clear existing data
-    const winProbabilities = {};
-
-    // Initialize win probabilities
-    teams.forEach(team => {
-        winProbabilities[team.name] = {};
-        teams.forEach(opponent => {
-            if (team.name !== opponent.name) {
-                const matches = matchHistory.filter(match => 
-                    (match.teamOne === team.name && match.teamTwo === opponent.name) || 
-                    (match.teamOne === opponent.name && match.teamTwo === team.name));
-                
-                const wins = matches.filter(match => match.winner === team.name).length;
-                const losses = matches.length - wins;
-                const probability = matches.length > 0 ? wins / matches.length : 0;
-
-                winProbabilities[team.name][opponent.name] = (probability * 100).toFixed(2) + "%";
-
-                // Insert into table
-                const row = probabilityTable.insertRow();
-                row.innerHTML = `
-                    <td>${team.name}</td>
-                    <td>${opponent.name}</td>
-                    <td>${winProbabilities[team.name][opponent.name]}</td>
-                `;
-            }
-        });
-    });
-}
-
 // Populate team dropdowns
 function populateDropdowns() {
     const teamOneSelect = document.getElementById("teamOne");
@@ -106,4 +73,3 @@ document.getElementById("submitMatch").addEventListener("click", function() {
 // Initialize
 populateDropdowns();
 updateTeamStats();
-calculateWinProbabilities();
