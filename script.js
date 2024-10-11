@@ -67,10 +67,10 @@ document.getElementById("matchForm").addEventListener("submit", function (event)
     // Get input values
     const teamOne = document.getElementById("teamOne").value;
     const scoreOne = parseInt(document.getElementById("scoreOne").value);
-    const oversOne = parseInt(document.getElementById("oversOne").value);
+    const oversOne = parseFloat(document.getElementById("oversOne").value);
     const teamTwo = document.getElementById("teamTwo").value;
     const scoreTwo = parseInt(document.getElementById("scoreTwo").value);
-    const oversTwo = parseInt(document.getElementById("oversTwo").value);
+    const oversTwo = parseFloat(document.getElementById("oversTwo").value);
 
     // Update team statistics
     updateTeamStats(teamOne, scoreOne, oversOne, teamTwo, scoreTwo, oversTwo);
