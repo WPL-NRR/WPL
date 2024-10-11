@@ -101,5 +101,7 @@ document.getElementById("submitMatch").addEventListener("click", function() {
 });
 
 // Initialize
-populateDropdowns();
-displayTeamStats();
+document.addEventListener("DOMContentLoaded", function() {
+    populateDropdowns();
+    displayTeamStats();
+});
