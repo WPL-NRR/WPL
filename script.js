@@ -120,21 +120,42 @@ function updateDisplay() {
     const tableBody = document.getElementById("teamStats").getElementsByTagName("tbody")[0];
     tableBody.innerHTML = ""; // Clear existing rows
 
-    let sNo = 1;
+    let teamDataArray = [];
+
+    // Calculate NRR for each team and add to an array for sorting
     for (const team in teams) {
         const teamStats = teams[team];
         const netRR = calculateNRR(teamStats.runsFor, teamStats.oversFor, teamStats.runsAgainst, teamStats.oversAgainst);
 
+        teamDataArray.push({
+            teamName: team,
+            matchesPlayed: teamStats.matchesPlayed,
+            won: teamStats.won,
+            lost: teamStats.lost,
+            points: teamStats.points,
+            winPercentage: ((teamStats.won / teamStats.matchesPlayed) * 100).toFixed(2) + "%",
+            netRR: netRR.toFixed(4),
+            runsFor: teamStats.runsFor,
+            runsAgainst: teamStats.runsAgainst
+        });
+    }
+
+    // Sort teams by NRR in descending order
+    teamDataArray.sort((a, b) => parseFloat(b.netRR) - parseFloat(a.netRR));
+
+    // Update the table with sorted teams
+    let sNo = 1;
+    teamDataArray.forEach((teamData) => {
         const row = tableBody.insertRow();
         row.insertCell(0).textContent = sNo++;
-        row.insertCell(1).textContent = team;
-        row.insertCell(2).textContent = teamStats.matchesPlayed;
-        row.insertCell(3).textContent = teamStats.won;
-        row.insertCell(4).textContent = teamStats.lost;
-        row.insertCell(5).textContent = teamStats.points;
-        row.insertCell(6).textContent = ((teamStats.won / teamStats.matchesPlayed) * 100).toFixed(2) + "%";
-        row.insertCell(7).textContent = netRR.toFixed(4);
-        row.insertCell(8).textContent = teamStats.runsFor;
-        row.insertCell(9).textContent = teamStats.runsAgainst;
-    }
+        row.insertCell(1).textContent = teamData.teamName;
+        row.insertCell(2).textContent = teamData.matchesPlayed;
+        row.insertCell(3).textContent = teamData.won;
+        row.insertCell(4).textContent = teamData.lost;
+        row.insertCell(5).textContent = teamData.points;
+        row.insertCell(6).textContent = teamData.winPercentage;
+        row.insertCell(7).textContent = teamData.netRR;
+        row.insertCell(8).textContent = teamData.runsFor;
+        row.insertCell(9).textContent = teamData.runsAgainst;
+    });
 }
