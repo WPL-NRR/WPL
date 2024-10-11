@@ -9,8 +9,8 @@ const teams = [
 
 // Function to calculate NRR
 function calculateNRR(runsFor, runsAgainst, oversFaced) {
-    const nrr = (runsFor / oversFaced - runsAgainst / oversFaced).toFixed(4);
-    return nrr;
+    if (oversFaced === 0) return 0; // Avoid division by zero
+    return ((runsFor / oversFaced) - (runsAgainst / oversFaced)).toFixed(4);
 }
 
 // Function to update team statistics
@@ -26,15 +26,15 @@ function updateTeamStats(winningTeam, losingTeam, winningScore, losingScore, ove
     // Update points
     winningTeam.points += 2;
 
-    // Update runs and NRR
+    // Update runs scored and conceded
     winningTeam.runsFor += winningScore;
     winningTeam.runsAgainst += losingScore;
     losingTeam.runsFor += losingScore;
     losingTeam.runsAgainst += winningScore;
 
     // Calculate new NRR
-    winningTeam.NRR = calculateNRR(winningTeam.runsFor, winningTeam.runsAgainst, oversWon);
-    losingTeam.NRR = calculateNRR(losingTeam.runsFor, losingTeam.runsAgainst, oversLost);
+    winningTeam.NRR = calculateNRR(winningTeam.runsFor, winningTeam.runsAgainst, winningTeam.matches * 22); // Assuming each team plays 22 overs in matches
+    losingTeam.NRR = calculateNRR(losingTeam.runsFor, losingTeam.runsAgainst, losingTeam.matches * 22);
 }
 
 // Function to update and display the team statistics
@@ -51,7 +51,7 @@ function displayTeamStats() {
             <td>${team.won}</td>
             <td>${team.lost}</td>
             <td>${team.points}</td>
-            <td>${team.winPercentage}</td>
+            <td>${((team.won / team.matches) * 100 || 0).toFixed(2)}%</td>
             <td>${team.NRR}</td>
             <td>${team.runsFor}</td>
             <td>${team.runsAgainst}</td>
