@@ -37,7 +37,7 @@ function calculateNRR(team) {
 }
 
 // Function to update team stats
-function updateTeamStats(winningTeam, losingTeam, winningScore, winningOvers, losingScore, losingOvers) {
+function updateTeamStats(winningTeam, losingTeam, winningScore, losingScore) {
     // Update winning team stats
     teamStats[winningTeam].matches++;
     teamStats[winningTeam].won++;
@@ -51,12 +51,38 @@ function updateTeamStats(winningTeam, losingTeam, winningScore, winningOvers, lo
     teamStats[losingTeam].forRuns += losingScore;
     teamStats[losingTeam].againstRuns += winningScore;
 
-    // Update the table
-    updateTable();
+    // Update the tables
+    updateCurrentTable();
+    updateMatchResultTable();
+}
+
+// Function to update the current stats table
+function updateCurrentTable() {
+    const tbody = document.getElementById('teamStatsCurrent');
+    tbody.innerHTML = ''; // Clear existing rows
+
+    const teams = Object.keys(teamStats);
+    teams.forEach((team, index) => {
+        const { matches, won, lost, points, forRuns, againstRuns } = teamStats[team];
+        row = document.createElement('tr');
+        row.innerHTML = `
+            <td>${index + 1}</td>
+            <td>${team}</td>
+            <td>${matches}</td>
+            <td>${won}</td>
+            <td>${lost}</td>
+            <td>${points}</td>
+            <td>${((won / matches) * 100).toFixed(2)}%</td>
+            <td>${calculateNRR(team)}</td>
+            <td>${forRuns}</td>
+            <td>${againstRuns}</td>
+        `;
+        tbody.appendChild(row);
+    });
 }
 
 // Function to update the stats table
-function updateTable() {
+function updateMatchResultTable() {
     const tbody = document.getElementById('teamStats');
     tbody.innerHTML = ''; // Clear existing rows
 
@@ -68,7 +94,7 @@ function updateTable() {
 
     teams.forEach((team, index) => {
         const { matches, won, lost, points, forRuns, againstRuns } = teamStats[team];
-        const row = document.createElement('tr');
+        row = document.createElement('tr');
         row.innerHTML = `
             <td>${index + 1}</td>
             <td>${team}</td>
@@ -92,9 +118,7 @@ document.getElementById('scoreForm').addEventListener('submit', function (e) {
     const team1 = document.getElementById('team1').value;
     const team2 = document.getElementById('team2').value;
     const team1Score = parseInt(document.getElementById('team1Score').value);
-    const team1Overs = parseFloat(document.getElementById('team1Overs').value);
     const team2Score = parseInt(document.getElementById('team2Score').value);
-    const team2Overs = parseFloat(document.getElementById('team2Overs').value);
 
     let winningTeam, losingTeam;
 
@@ -106,11 +130,12 @@ document.getElementById('scoreForm').addEventListener('submit', function (e) {
         losingTeam = team1;
     }
 
-    updateTeamStats(winningTeam, losingTeam, team1Score, team1Overs, team2Score, team2Overs);
+    updateTeamStats(winningTeam, losingTeam, team1Score, team2Score);
     
     // Reset the form
     document.getElementById('scoreForm').reset();
 });
 
-// Initialize table on page load
-updateTable();
+// Initialize tables on page load
+updateCurrentTable();
+updateMatchResultTable();
