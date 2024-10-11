@@ -1,161 +1,91 @@
-const teams = {
-    "TOOFAN": {
-        runsFor: 576,
-        oversFor: 94,
-        runsAgainst: 531,
-        oversAgainst: 94,
-        matchesPlayed: 4,
-        won: 3,
-        lost: 1,
-        points: 6
-    },
-    "TOP GUNS": {
-        runsFor: 596,
-        oversFor: 94,
-        runsAgainst: 583,
-        oversAgainst: 87.5,
-        matchesPlayed: 4,
-        won: 3,
-        lost: 1,
-        points: 6
-    },
-    "WOODLANDS UNITED": {
-        runsFor: 562,
-        oversFor: 91.1,
-        runsAgainst: 494,
-        oversAgainst: 94,
-        matchesPlayed: 4,
-        won: 2,
-        lost: 2,
-        points: 4
-    },
-    "BHAIRAVA": {
-        runsFor: 527,
-        oversFor: 83.5,
-        runsAgainst: 543,
-        oversAgainst: 88,
-        matchesPlayed: 4,
-        won: 2,
-        lost: 2,
-        points: 4
-    },
-    "WOODLANDS KHILADIS": {
-        runsFor: 501,
-        oversFor: 84.5,
-        runsAgainst: 588,
-        oversAgainst: 91,
-        matchesPlayed: 4,
-        won: 1,
-        lost: 3,
-        points: 2
-    },
-    "RAGING BULLS": {
-        runsFor: 501,
-        oversFor: 91,
-        runsAgainst: 524,
-        oversAgainst: 84,
-        matchesPlayed: 4,
-        won: 1,
-        lost: 3,
-        points: 2
-    },
-};
+// Sample teams data structure
+let teams = [
+  { team: "TOOFAN", mat: 4, won: 3, lost: 1, pts: 6, winPercent: 75.00, netRR: 0.4500, for: 576, against: 531 },
+  { team: "TOP GUNS", mat: 4, won: 3, lost: 1, pts: 6, winPercent: 75.00, netRR: 0.1300, for: 596, against: 583 },
+  { team: "WOODLANDS UNITED", mat: 4, won: 2, lost: 2, pts: 4, winPercent: 50.00, netRR: 0.6800, for: 562, against: 494 },
+  { team: "BHAIRAVA", mat: 4, won: 2, lost: 2, pts: 4, winPercent: 50.00, netRR: -0.1600, for: 527, against: 543 },
+  { team: "WOODLANDS KHILADIS", mat: 4, won: 1, lost: 3, pts: 2, winPercent: 25.00, netRR: -0.8700, for: 501, against: 588 },
+  { team: "RAGING BULLS", mat: 4, won: 1, lost: 3, pts: 2, winPercent: 25.00, netRR: -0.7326, for: 501, against: 524 }
+];
 
-document.getElementById("matchForm").addEventListener("submit", function (event) {
-    event.preventDefault(); // Prevent form submission
+// Function to update NRR and points
+function updateStats(teamOneName, teamTwoName, teamOneRuns, teamOneOvers, teamTwoRuns, teamTwoOvers) {
+  let teamOne = teams.find(t => t.team === teamOneName);
+  let teamTwo = teams.find(t => t.team === teamTwoName);
 
-    // Get input values
-    const teamOne = document.getElementById("teamOne").value;
-    const scoreOne = parseInt(document.getElementById("scoreOne").value);
-    const oversOne = parseFloat(document.getElementById("oversOne").value);
-    const teamTwo = document.getElementById("teamTwo").value;
-    const scoreTwo = parseInt(document.getElementById("scoreTwo").value);
-    const oversTwo = parseFloat(document.getElementById("oversTwo").value);
+  // Calculate Net Run Rate for both teams
+  const teamOneRR = teamOneRuns / teamOneOvers;
+  const teamTwoRR = teamTwoRuns / teamTwoOvers;
 
-    // Update team statistics
-    updateTeamStats(teamOne, scoreOne, oversOne, teamTwo, scoreTwo, oversTwo);
+  teamOne.for += teamOneRuns;
+  teamOne.against += teamTwoRuns;
+  teamTwo.for += teamTwoRuns;
+  teamTwo.against += teamOneRuns;
 
-    // Clear the form
-    document.getElementById("matchForm").reset();
+  const newNRRTeamOne = ((teamOne.for / teamOne.mat) - (teamOne.against / teamOne.mat)).toFixed(4);
+  const newNRRTeamTwo = ((teamTwo.for / teamTwo.mat) - (teamTwo.against / teamTwo.mat)).toFixed(4);
+
+  teamOne.netRR = parseFloat(newNRRTeamOne);
+  teamTwo.netRR = parseFloat(newNRRTeamTwo);
+
+  // Update the matches played
+  teamOne.mat += 1;
+  teamTwo.mat += 1;
+
+  // Determine the winning team and update points
+  if (teamOneRuns > teamTwoRuns) {
+    teamOne.won += 1;
+    teamTwo.lost += 1;
+    teamOne.pts += 2;
+  } else {
+    teamTwo.won += 1;
+    teamOne.lost += 1;
+    teamTwo.pts += 2;
+  }
+
+  // Update Win%
+  teamOne.winPercent = ((teamOne.won / teamOne.mat) * 100).toFixed(2);
+  teamTwo.winPercent = ((teamTwo.won / teamTwo.mat) * 100).toFixed(2);
+
+  // Sort the teams by Points and NRR
+  teams.sort((a, b) => b.pts - a.pts || b.netRR - a.netRR);
+
+  // Update the table in the HTML
+  updateTable();
+}
+
+// Function to update the table in the HTML
+function updateTable() {
+  const tableBody = document.querySelector("#teamsTable tbody");
+  tableBody.innerHTML = "";
+
+  teams.forEach((team, index) => {
+    const row = `<tr>
+        <td>${index + 1}</td>
+        <td>${team.team}</td>
+        <td>${team.mat}</td>
+        <td>${team.won}</td>
+        <td>${team.lost}</td>
+        <td>${team.pts}</td>
+        <td>${team.winPercent}%</td>
+        <td>${team.netRR.toFixed(4)}</td>
+        <td>${team.for}</td>
+        <td>${team.against}</td>
+      </tr>`;
+    tableBody.insertAdjacentHTML("beforeend", row);
+  });
+}
+
+// Event listener for the form submission
+document.querySelector("#scoreForm").addEventListener("submit", function (e) {
+  e.preventDefault();
+
+  const teamOneName = document.querySelector("#teamOne").value;
+  const teamTwoName = document.querySelector("#teamTwo").value;
+  const teamOneRuns = parseInt(document.querySelector("#teamOneRuns").value);
+  const teamOneOvers = parseFloat(document.querySelector("#teamOneOvers").value);
+  const teamTwoRuns = parseInt(document.querySelector("#teamTwoRuns").value);
+  const teamTwoOvers = parseFloat(document.querySelector("#teamTwoOvers").value);
+
+  updateStats(teamOneName, teamTwoName, teamOneRuns, teamOneOvers, teamTwoRuns, teamTwoOvers);
 });
-
-function updateTeamStats(teamOne, scoreOne, oversOne, teamTwo, scoreTwo, oversTwo) {
-    // Update team one stats
-    teams[teamOne].runsFor += scoreOne;
-    teams[teamOne].oversFor += oversOne;
-    teams[teamOne].matchesPlayed += 1;
-
-    // Update team two stats
-    teams[teamTwo].runsFor += scoreTwo;
-    teams[teamTwo].oversFor += oversTwo;
-    teams[teamTwo].matchesPlayed += 1;
-
-    // Update runs against
-    teams[teamOne].runsAgainst += scoreTwo;
-    teams[teamTwo].runsAgainst += scoreOne;
-
-    teams[teamOne].oversAgainst += oversTwo;
-    teams[teamTwo].oversAgainst += oversOne;
-
-    // Update wins and losses
-    if (scoreOne > scoreTwo) {
-        teams[teamOne].won += 1;
-        teams[teamTwo].lost += 1;
-        teams[teamOne].points += 2;
-    } else {
-        teams[teamTwo].won += 1;
-        teams[teamOne].lost += 1;
-        teams[teamTwo].points += 2;
-    }
-
-    // Update NRR and display
-    updateDisplay();
-}
-
-function calculateNRR(runsFor, oversFor, runsAgainst, oversAgainst) {
-    return (runsFor / oversFor) - (runsAgainst / oversAgainst);
-}
-
-function updateDisplay() {
-    const tableBody = document.getElementById("teamStats").getElementsByTagName("tbody")[0];
-    tableBody.innerHTML = ""; // Clear existing rows
-
-    let teamDataArray = [];
-
-    // Calculate NRR for each team and add to an array for sorting
-    for (const team in teams) {
-        const teamStats = teams[team];
-        const netRR = calculateNRR(teamStats.runsFor, teamStats.oversFor, teamStats.runsAgainst, teamStats.oversAgainst);
-
-        teamDataArray.push({
-            teamName: team,
-            matchesPlayed: teamStats.matchesPlayed,
-            won: teamStats.won,
-            lost: teamStats.lost,
-            points: teamStats.points,
-            winPercentage: ((teamStats.won / teamStats.matchesPlayed) * 100).toFixed(2) + "%",
-            netRR: netRR.toFixed(4),
-            runsFor: teamStats.runsFor,
-            runsAgainst: teamStats.runsAgainst
-        });
-    }
-
-    // Sort teams by NRR in descending order
-    teamDataArray.sort((a, b) => parseFloat(b.netRR) - parseFloat(a.netRR));
-
-    // Update the table with sorted teams
-    let sNo = 1;
-    teamDataArray.forEach((teamData) => {
-        const row = tableBody.insertRow();
-        row.insertCell(0).textContent = sNo++;
-        row.insertCell(1).textContent = teamData.teamName;
-        row.insertCell(2).textContent = teamData.matchesPlayed;
-        row.insertCell(3).textContent = teamData.won;
-        row.insertCell(4).textContent = teamData.lost;
-        row.insertCell(5).textContent = teamData.points;
-        row.insertCell(6).textContent = teamData.winPercentage;
-        row.insertCell(7).textContent = teamData.netRR;
-        row.insertCell(8).textContent = teamData.runsFor;
-        row.insertCell(9).textContent = teamData.runsAgainst;
-    });
-}
