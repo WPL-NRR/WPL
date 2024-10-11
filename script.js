@@ -9,9 +9,39 @@ const teams = {
         lost: 1,
         points: 6
     },
+    "TOP GUNS": {
+        runsFor: 596,
+        oversFor: 94,
+        runsAgainst: 583,
+        oversAgainst: 87.5,
+        matchesPlayed: 4,
+        won: 3,
+        lost: 1,
+        points: 6
+    },
+    "WOODLANDS UNITED": {
+        runsFor: 562,
+        oversFor: 91.1,
+        runsAgainst: 494,
+        oversAgainst: 94,
+        matchesPlayed: 4,
+        won: 2,
+        lost: 2,
+        points: 4
+    },
+    "BHAIRAVA": {
+        runsFor: 527,
+        oversFor: 83.5,
+        runsAgainst: 543,
+        oversAgainst: 88,
+        matchesPlayed: 4,
+        won: 2,
+        lost: 2,
+        points: 4
+    },
     "WOODLANDS KHILADIS": {
         runsFor: 501,
-        oversFor: 84,
+        oversFor: 84.5,
         runsAgainst: 588,
         oversAgainst: 91,
         matchesPlayed: 4,
@@ -19,7 +49,16 @@ const teams = {
         lost: 3,
         points: 2
     },
-    // Add other teams here
+    "RAGING BULLS": {
+        runsFor: 501,
+        oversFor: 91,
+        runsAgainst: 524,
+        oversAgainst: 84,
+        matchesPlayed: 4,
+        won: 1,
+        lost: 3,
+        points: 2
+    },
 };
 
 document.getElementById("matchForm").addEventListener("submit", function (event) {
@@ -54,6 +93,9 @@ function updateTeamStats(teamOne, scoreOne, oversOne, teamTwo, scoreTwo, oversTw
     // Update runs against
     teams[teamOne].runsAgainst += scoreTwo;
     teams[teamTwo].runsAgainst += scoreOne;
+
+    teams[teamOne].oversAgainst += oversTwo;
+    teams[teamTwo].oversAgainst += oversOne;
 
     // Update wins and losses
     if (scoreOne > scoreTwo) {
