@@ -4,7 +4,30 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cricket Tournament Dashboard</title>
-    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        h1, h2 {
+            color: #333;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+        th, td {
+            padding: 8px;
+            text-align: center;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
 </head>
 <body>
     <h1>Cricket Tournament Dashboard</h1>
@@ -17,16 +40,16 @@
         <select id="teamTwo"></select>
         
         <label for="scoreOne">Score of Team One:</label>
-        <input type="number" id="scoreOne" min="0">
+        <input type="number" id="scoreOne" min="0" required>
         
         <label for="oversOne">Overs of Team One:</label>
-        <input type="number" id="oversOne" min="0">
+        <input type="number" id="oversOne" min="0" required>
         
         <label for="scoreTwo">Score of Team Two:</label>
-        <input type="number" id="scoreTwo" min="0">
+        <input type="number" id="scoreTwo" min="0" required>
         
         <label for="oversTwo">Overs of Team Two:</label>
-        <input type="number" id="oversTwo" min="0">
+        <input type="number" id="oversTwo" min="0" required>
         
         <button id="submitMatch">Submit Match Result</button>
     </div>
