@@ -1,4 +1,4 @@
-// Sample teams data structure
+// Sample teams data structure with the provided initial values
 let teams = [
   { team: "TOOFAN", mat: 4, won: 3, lost: 1, pts: 6, winPercent: 75.00, netRR: 0.4500, for: 576, against: 531 },
   { team: "TOP GUNS", mat: 4, won: 3, lost: 1, pts: 6, winPercent: 75.00, netRR: 0.1300, for: 596, against: 583 },
@@ -13,22 +13,13 @@ function updateStats(teamOneName, teamTwoName, teamOneRuns, teamOneOvers, teamTw
   let teamOne = teams.find(t => t.team === teamOneName);
   let teamTwo = teams.find(t => t.team === teamTwoName);
 
-  // Calculate Net Run Rate for both teams
-  const teamOneRR = teamOneRuns / teamOneOvers;
-  const teamTwoRR = teamTwoRuns / teamTwoOvers;
-
+  // Calculate new totals
   teamOne.for += teamOneRuns;
   teamOne.against += teamTwoRuns;
   teamTwo.for += teamTwoRuns;
   teamTwo.against += teamOneRuns;
 
-  const newNRRTeamOne = ((teamOne.for / teamOne.mat) - (teamOne.against / teamOne.mat)).toFixed(4);
-  const newNRRTeamTwo = ((teamTwo.for / teamTwo.mat) - (teamTwo.against / teamTwo.mat)).toFixed(4);
-
-  teamOne.netRR = parseFloat(newNRRTeamOne);
-  teamTwo.netRR = parseFloat(newNRRTeamTwo);
-
-  // Update the matches played
+  // Update matches played
   teamOne.mat += 1;
   teamTwo.mat += 1;
 
@@ -42,6 +33,10 @@ function updateStats(teamOneName, teamTwoName, teamOneRuns, teamOneOvers, teamTw
     teamOne.lost += 1;
     teamTwo.pts += 2;
   }
+
+  // Calculate Net Run Rate for both teams
+  teamOne.netRR = ((teamOne.for / teamOne.mat) - (teamOne.against / teamOne.mat)).toFixed(4);
+  teamTwo.netRR = ((teamTwo.for / teamTwo.mat) - (teamTwo.against / teamTwo.mat)).toFixed(4);
 
   // Update Win%
   teamOne.winPercent = ((teamOne.won / teamOne.mat) * 100).toFixed(2);
@@ -68,7 +63,7 @@ function updateTable() {
         <td>${team.lost}</td>
         <td>${team.pts}</td>
         <td>${team.winPercent}%</td>
-        <td>${team.netRR.toFixed(4)}</td>
+        <td>${team.netRR}</td>
         <td>${team.for}</td>
         <td>${team.against}</td>
       </tr>`;
@@ -89,3 +84,6 @@ document.querySelector("#scoreForm").addEventListener("submit", function (e) {
 
   updateStats(teamOneName, teamTwoName, teamOneRuns, teamOneOvers, teamTwoRuns, teamTwoOvers);
 });
+
+// Initial table population
+updateTable();
