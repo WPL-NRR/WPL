@@ -3,18 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cricket Team Stats</title>
+    <title>Cricket Team Statistics</title>
     <style>
         body {
             font-family: Arial, sans-serif;
             margin: 20px;
-            padding: 20px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
         }
         table {
-            width: 100%;
             border-collapse: collapse;
+            width: 100%;
             margin-top: 20px;
         }
         th, td {
@@ -25,141 +22,65 @@
         th {
             background-color: #f2f2f2;
         }
+        form {
+            margin-bottom: 20px;
+        }
     </style>
 </head>
 <body>
 
 <h1>Cricket Team Statistics</h1>
 
-<!-- Form to input scores and overs -->
+<h2>Current Stats</h2>
+<table>
+    <thead>
+        <tr>
+            <th>SNO</th>
+            <th>TEAM</th>
+            <th>MAT</th>
+            <th>WON</th>
+            <th>LOST</th>
+            <th>PTS</th>
+            <th>WIN%</th>
+            <th>NET RR</th>
+            <th>FOR</th>
+            <th>AGAINST</th>
+        </tr>
+    </thead>
+    <tbody id="teamStatsCurrent"></tbody>
+</table>
+
+<h2>Update Match Result</h2>
 <form id="scoreForm">
-    <h2>Input Match Scores</h2>
     <label for="team1">Select Team 1:</label>
-    <select id="team1" required>
-        <option value="">Select Team</option>
-        <option value="TOOFAN">TOOFAN</option>
-        <option value="TOP GUNS">TOP GUNS</option>
-        <option value="WOODLANDS UNITED">WOODLANDS UNITED</option>
-        <option value="BHAIRAVA">BHAIRAVA</option>
-        <option value="WOODLANDS KHILADIS">WOODLANDS KHILADIS</option>
-        <option value="RAGING BULLS">RAGING BULLS</option>
-    </select>
-
-    <label for="team1Score">Team 1 Score:</label>
-    <input type="number" id="team1Score" required placeholder="Runs scored by Team 1">
-
-    <label for="team1Overs">Team 1 Overs:</label>
-    <input type="number" id="team1Overs" required placeholder="Overs faced by Team 1" step="0.1">
-
+    <select id="team1"></select>
+    <label for="team1Score">Score:</label>
+    <input type="number" id="team1Score" required>
+    
     <label for="team2">Select Team 2:</label>
-    <select id="team2" required>
-        <option value="">Select Team</option>
-        <option value="TOOFAN">TOOFAN</option>
-        <option value="TOP GUNS">TOP GUNS</option>
-        <option value="WOODLANDS UNITED">WOODLANDS UNITED</option>
-        <option value="BHAIRAVA">BHAIRAVA</option>
-        <option value="WOODLANDS KHILADIS">WOODLANDS KHILADIS</option>
-        <option value="RAGING BULLS">RAGING BULLS</option>
-    </select>
+    <select id="team2"></select>
+    <label for="team2Score">Score:</label>
+    <input type="number" id="team2Score" required>
 
-    <label for="team2Score">Team 2 Score:</label>
-    <input type="number" id="team2Score" required placeholder="Runs scored by Team 2">
-
-    <label for="team2Overs">Team 2 Overs:</label>
-    <input type="number" id="team2Overs" required placeholder="Overs faced by Team 2" step="0.1">
-
-    <button type="submit">Submit</button>
+    <button type="submit">Submit Match Result</button>
 </form>
 
 <table>
     <thead>
         <tr>
-            <th>S.No</th>
-            <th>Team</th>
-            <th>Mat</th>
-            <th>Won</th>
-            <th>Lost</th>
-            <th>Pts</th>
-            <th>Win%</th>
-            <th>Net RR</th>
-            <th>For</th>
-            <th>Against</th>
+            <th>SNO</th>
+            <th>TEAM</th>
+            <th>MAT</th>
+            <th>WON</th>
+            <th>LOST</th>
+            <th>PTS</th>
+            <th>WIN%</th>
+            <th>NET RR</th>
+            <th>FOR</th>
+            <th>AGAINST</th>
         </tr>
     </thead>
-    <tbody id="teamStats">
-        <tr>
-            <td>1</td>
-            <td>TOOFAN</td>
-            <td>4</td>
-            <td>3</td>
-            <td>1</td>
-            <td>6.0</td>
-            <td>75.00%</td>
-            <td>0.4787</td>
-            <td>576/94.0</td>
-            <td>531/94.0</td>
-        </tr>
-        <tr>
-            <td>2</td>
-            <td>TOP GUNS</td>
-            <td>4</td>
-            <td>3</td>
-            <td>1</td>
-            <td>6.0</td>
-            <td>75.00%</td>
-            <td>-0.2971</td>
-            <td>596/94.0</td>
-            <td>583/87.5</td>
-        </tr>
-        <tr>
-            <td>3</td>
-            <td>WOODLANDS UNITED</td>
-            <td>4</td>
-            <td>2</td>
-            <td>2</td>
-            <td>4.0</td>
-            <td>50.00%</td>
-            <td>0.9092</td>
-            <td>562/91.1</td>
-            <td>494/94.0</td>
-        </tr>
-        <tr>
-            <td>4</td>
-            <td>BHAIRAVA</td>
-            <td>4</td>
-            <td>2</td>
-            <td>2</td>
-            <td>4.0</td>
-            <td>50.00%</td>
-            <td>0.1158</td>
-            <td>527/83.5</td>
-            <td>543/88.0</td>
-        </tr>
-        <tr>
-            <td>5</td>
-            <td>WOODLANDS KHILADIS</td>
-            <td>4</td>
-            <td>1</td>
-            <td>3</td>
-            <td>2.0</td>
-            <td>25.00%</td>
-            <td>-0.5558</td>
-            <td>501/84.5</td>
-            <td>588/91.0</td>
-        </tr>
-        <tr>
-            <td>6</td>
-            <td>RAGING BULLS</td>
-            <td>4</td>
-            <td>1</td>
-            <td>3</td>
-            <td>2.0</td>
-            <td>25.00%</td>
-            <td>-0.7326</td>
-            <td>501/91.0</td>
-            <td>524/84.0</td>
-        </tr>
-    </tbody>
+    <tbody id="teamStats"></tbody>
 </table>
 
 <script src="script.js"></script>
