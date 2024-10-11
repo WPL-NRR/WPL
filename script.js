@@ -1,11 +1,11 @@
-// Initial team data
+// Initial team data with exact values
 const teams = [
-    { name: "TOOFAN", matches: 4, won: 3, lost: 1, points: 6, runsFor: 576, runsAgainst: 531, overs: 94 },
-    { name: "TOP GUNS", matches: 4, won: 3, lost: 1, points: 6, runsFor: 596, runsAgainst: 583, overs: 94 },
-    { name: "WOODLANDS UNITED", matches: 4, won: 2, lost: 2, points: 4, runsFor: 562, runsAgainst: 494, overs: 94 },
-    { name: "BHAIRAVA", matches: 4, won: 2, lost: 2, points: 4, runsFor: 527, runsAgainst: 543, overs: 83.5 },
-    { name: "WOODLANDS KHILADIS", matches: 4, won: 1, lost: 3, points: 2, runsFor: 501, runsAgainst: 588, overs: 84.5 },
-    { name: "RAGING BULLS", matches: 4, won: 1, lost: 3, points: 2, runsFor: 501, runsAgainst: 524, overs: 91 }
+    { name: "TOOFAN", matches: 4, won: 3, lost: 1, points: 6, winPercentage: "75.00%", NRR: 0.4787, runsFor: 576, runsAgainst: 531, overs: 94 },
+    { name: "TOP GUNS", matches: 4, won: 3, lost: 1, points: 6, winPercentage: "75.00%", NRR: -0.2971, runsFor: 596, runsAgainst: 583, overs: 94 },
+    { name: "WOODLANDS UNITED", matches: 4, won: 2, lost: 2, points: 4, winPercentage: "50.00%", NRR: 0.9092, runsFor: 562, runsAgainst: 494, overs: 91.1 },
+    { name: "BHAIRAVA", matches: 4, won: 2, lost: 2, points: 4, winPercentage: "50.00%", NRR: 0.1158, runsFor: 527, runsAgainst: 543, overs: 83.5 },
+    { name: "WOODLANDS KHILADIS", matches: 4, won: 1, lost: 3, points: 2, winPercentage: "25.00%", NRR: -0.5558, runsFor: 501, runsAgainst: 588, overs: 84.5 },
+    { name: "RAGING BULLS", matches: 4, won: 1, lost: 3, points: 2, winPercentage: "25.00%", NRR: -0.7326, runsFor: 501, runsAgainst: 524, overs: 91 }
 ];
 
 // Function to calculate NRR
@@ -13,8 +13,9 @@ function calculateNRR(team) {
     const runsScored = team.runsFor;
     const runsConceded = team.runsAgainst;
     const oversFaced = team.overs;
-    
-    return (runsScored / oversFaced) - (runsConceded / (oversFaced - (oversFaced / 20) * team.lost)); // Subtract overs for lost matches
+
+    // Calculate NRR
+    return (runsScored / oversFaced) - (runsConceded / oversFaced);
 }
 
 // Function to update team statistics
@@ -74,7 +75,7 @@ function displayStandings() {
             <td>${team.won}</td>
             <td>${team.lost}</td>
             <td>${team.points}</td>
-            <td>${((team.won / team.matches) * 100).toFixed(2)}%</td>
+            <td>${team.winPercentage}</td>
             <td>${team.NRR.toFixed(4)}</td>
             <td>${team.runsFor}</td>
             <td>${team.runsAgainst}</td>
@@ -98,11 +99,6 @@ document.getElementById('updateButton').addEventListener('click', () => {
     updateTeamStatistics(teamOne, teamTwo, scoreOne, oversOne, scoreTwo, oversTwo);
     sortTeams();
     displayStandings();
-});
-
-// Initialize NRR for all teams
-teams.forEach(team => {
-    team.NRR = calculateNRR(team);
 });
 
 // Display initial standings
