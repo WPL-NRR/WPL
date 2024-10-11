@@ -3,100 +3,41 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cricket Team Standings</title>
+    <title>Cricket Team Dashboard</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-        }
         table {
             width: 100%;
             border-collapse: collapse;
-            margin-top: 20px;
         }
-
-        table, th, td {
-            border: 1px solid black;
-        }
-
         th, td {
+            border: 1px solid black;
             padding: 8px;
             text-align: center;
-        }
-
-        th {
-            background-color: #f2f2f2;
         }
     </style>
 </head>
 <body>
-
     <h1>Cricket Team Standings</h1>
-
-    <!-- Form for entering scores -->
-    <form id="scoreForm">
-        <label for="teamOne">Select Team One:</label>
-        <select id="teamOne" required>
-            <option value="TOOFAN">TOOFAN</option>
-            <option value="TOP GUNS">TOP GUNS</option>
-            <option value="WOODLANDS UNITED">WOODLANDS UNITED</option>
-            <option value="BHAIRAVA">BHAIRAVA</option>
-            <option value="WOODLANDS KHILADIS">WOODLANDS KHILADIS</option>
-            <option value="RAGING BULLS">RAGING BULLS</option>
-        </select>
-
-        <label for="teamOneRuns">Team One Runs:</label>
-        <input type="number" id="teamOneRuns" required>
-
-        <label for="teamOneOvers">Team One Overs:</label>
-        <input type="number" step="0.1" id="teamOneOvers" required>
-
-        <br><br>
-
-        <label for="teamTwo">Select Team Two:</label>
-        <select id="teamTwo" required>
-            <option value="TOOFAN">TOOFAN</option>
-            <option value="TOP GUNS">TOP GUNS</option>
-            <option value="WOODLANDS UNITED">WOODLANDS UNITED</option>
-            <option value="BHAIRAVA">BHAIRAVA</option>
-            <option value="WOODLANDS KHILADIS">WOODLANDS KHILADIS</option>
-            <option value="RAGING BULLS">RAGING BULLS</option>
-        </select>
-
-        <label for="teamTwoRuns">Team Two Runs:</label>
-        <input type="number" id="teamTwoRuns" required>
-
-        <label for="teamTwoOvers">Team Two Overs:</label>
-        <input type="number" step="0.1" id="teamTwoOvers" required>
-
-        <br><br>
-        <button type="submit">Update</button>
-    </form>
-
-    <br><br>
-
-    <!-- Table for displaying team standings -->
-    <table id="teamsTable">
+    <table>
         <thead>
             <tr>
                 <th>S.No</th>
                 <th>Team</th>
-                <th>Mat</th>
+                <th>Matches</th>
                 <th>Won</th>
                 <th>Lost</th>
-                <th>Pts</th>
-                <th>Win%</th>
-                <th>Net RR</th>
-                <th>For</th>
-                <th>Against</th>
+                <th>Points</th>
+                <th>Win Percentage</th>
+                <th>NRR</th>
+                <th>Runs For</th>
+                <th>Runs Against</th>
             </tr>
         </thead>
-        <tbody>
-            <!-- Dynamic team stats will be inserted here by JavaScript -->
+        <tbody id="teamTableBody">
+            <!-- Team data will be inserted here -->
         </tbody>
     </table>
 
     <script src="script.js"></script>
-
 </body>
 </html>
