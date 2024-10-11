@@ -60,7 +60,7 @@ function updateHistoricalStatistics() {
 // Function to calculate NRR
 function calculateNRR(team) {
     const oversFaced = team.overs > 0 ? team.overs : 1; // Avoid division by zero
-    const oversBowled = team.matches * 22; // Assuming 22 overs per match
+    const oversBowled = matchHistory.length * 22; // Assuming 22 overs per match
 
     const runRateScored = team.runsFor / oversFaced;
     const runRateConceded = team.runsAgainst / oversBowled;
@@ -72,6 +72,8 @@ function calculateNRR(team) {
 function recalculateNRR() {
     teams.forEach(team => {
         team.NRR = calculateNRR(team);
+        // Calculate win percentage for display
+        team.winPercentage = ((team.won / team.matches) * 100).toFixed(2) + '%';
     });
 }
 
@@ -109,12 +111,8 @@ function displayStandings() {
     });
 }
 
-// Update statistics with historical matches
+// Initialize and display the standings
 updateHistoricalStatistics();
-
-// Recalculate NRR for all teams
 recalculateNRR();
-
-// Sort teams and display the standings
 sortTeams();
 displayStandings();
