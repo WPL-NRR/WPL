@@ -1,89 +1,109 @@
-// Sample teams data structure with the provided initial values
-let teams = [
-  { team: "TOOFAN", mat: 4, won: 3, lost: 1, pts: 6, winPercent: 75.00, netRR: 0.4500, for: 576, against: 531 },
-  { team: "TOP GUNS", mat: 4, won: 3, lost: 1, pts: 6, winPercent: 75.00, netRR: 0.1300, for: 596, against: 583 },
-  { team: "WOODLANDS UNITED", mat: 4, won: 2, lost: 2, pts: 4, winPercent: 50.00, netRR: 0.6800, for: 562, against: 494 },
-  { team: "BHAIRAVA", mat: 4, won: 2, lost: 2, pts: 4, winPercent: 50.00, netRR: -0.1600, for: 527, against: 543 },
-  { team: "WOODLANDS KHILADIS", mat: 4, won: 1, lost: 3, pts: 2, winPercent: 25.00, netRR: -0.8700, for: 501, against: 588 },
-  { team: "RAGING BULLS", mat: 4, won: 1, lost: 3, pts: 2, winPercent: 25.00, netRR: -0.7326, for: 501, against: 524 }
+// Initial team data
+const teams = [
+    { name: "TOOFAN", matches: 4, won: 3, lost: 1, points: 6, runsFor: 576, runsAgainst: 531, overs: 94 },
+    { name: "TOP GUNS", matches: 4, won: 3, lost: 1, points: 6, runsFor: 596, runsAgainst: 583, overs: 94 },
+    { name: "WOODLANDS UNITED", matches: 4, won: 2, lost: 2, points: 4, runsFor: 562, runsAgainst: 494, overs: 94 },
+    { name: "BHAIRAVA", matches: 4, won: 2, lost: 2, points: 4, runsFor: 527, runsAgainst: 543, overs: 83.5 },
+    { name: "WOODLANDS KHILADIS", matches: 4, won: 1, lost: 3, points: 2, runsFor: 501, runsAgainst: 588, overs: 84.5 },
+    { name: "RAGING BULLS", matches: 4, won: 1, lost: 3, points: 2, runsFor: 501, runsAgainst: 524, overs: 91 }
 ];
 
-// Function to update NRR and points
-function updateStats(teamOneName, teamTwoName, teamOneRuns, teamOneOvers, teamTwoRuns, teamTwoOvers) {
-  let teamOne = teams.find(t => t.team === teamOneName);
-  let teamTwo = teams.find(t => t.team === teamTwoName);
-
-  // Calculate new totals
-  teamOne.for += teamOneRuns;
-  teamOne.against += teamTwoRuns;
-  teamTwo.for += teamTwoRuns;
-  teamTwo.against += teamOneRuns;
-
-  // Update matches played
-  teamOne.mat += 1;
-  teamTwo.mat += 1;
-
-  // Determine the winning team and update points
-  if (teamOneRuns > teamTwoRuns) {
-    teamOne.won += 1;
-    teamTwo.lost += 1;
-    teamOne.pts += 2;
-  } else {
-    teamTwo.won += 1;
-    teamOne.lost += 1;
-    teamTwo.pts += 2;
-  }
-
-  // Calculate Net Run Rate for both teams
-  teamOne.netRR = ((teamOne.for / teamOne.mat) - (teamOne.against / teamOne.mat)).toFixed(4);
-  teamTwo.netRR = ((teamTwo.for / teamTwo.mat) - (teamTwo.against / teamTwo.mat)).toFixed(4);
-
-  // Update Win%
-  teamOne.winPercent = ((teamOne.won / teamOne.mat) * 100).toFixed(2);
-  teamTwo.winPercent = ((teamTwo.won / teamTwo.mat) * 100).toFixed(2);
-
-  // Sort the teams by Points and NRR
-  teams.sort((a, b) => b.pts - a.pts || b.netRR - a.netRR);
-
-  // Update the table in the HTML
-  updateTable();
+// Function to calculate NRR
+function calculateNRR(team) {
+    const runsScored = team.runsFor;
+    const runsConceded = team.runsAgainst;
+    const oversFaced = team.overs;
+    
+    return (runsScored / oversFaced) - (runsConceded / (oversFaced - (oversFaced / 20) * team.lost)); // Subtract overs for lost matches
 }
 
-// Function to update the table in the HTML
-function updateTable() {
-  const tableBody = document.querySelector("#teamsTable tbody");
-  tableBody.innerHTML = "";
+// Function to update team statistics
+function updateTeamStatistics(teamOne, teamTwo, scoreOne, oversOne, scoreTwo, oversTwo) {
+    // Update match counts
+    teamOne.matches++;
+    teamTwo.matches++;
 
-  teams.forEach((team, index) => {
-    const row = `<tr>
-        <td>${index + 1}</td>
-        <td>${team.team}</td>
-        <td>${team.mat}</td>
-        <td>${team.won}</td>
-        <td>${team.lost}</td>
-        <td>${team.pts}</td>
-        <td>${team.winPercent}%</td>
-        <td>${team.netRR}</td>
-        <td>${team.for}</td>
-        <td>${team.against}</td>
-      </tr>`;
-    tableBody.insertAdjacentHTML("beforeend", row);
-  });
+    // Update wins and losses
+    if (scoreOne > scoreTwo) {
+        teamOne.won++;
+        teamTwo.lost++;
+        teamOne.points += 2; // 2 points for a win
+    } else {
+        teamTwo.won++;
+        teamOne.lost++;
+        teamTwo.points += 2; // 2 points for a win
+    }
+
+    // Update runs scored and against
+    teamOne.runsFor += scoreOne;
+    teamTwo.runsFor += scoreTwo;
+    teamOne.runsAgainst += scoreTwo;
+    teamTwo.runsAgainst += scoreOne;
+
+    // Update overs
+    teamOne.overs += oversOne;
+    teamTwo.overs += oversTwo;
+
+    // Calculate new NRR
+    teamOne.NRR = calculateNRR(teamOne);
+    teamTwo.NRR = calculateNRR(teamTwo);
 }
 
-// Event listener for the form submission
-document.querySelector("#scoreForm").addEventListener("submit", function (e) {
-  e.preventDefault();
+// Function to sort teams based on points and NRR
+function sortTeams() {
+    teams.sort((a, b) => {
+        if (b.points !== a.points) {
+            return b.points - a.points; // Sort by points
+        } else {
+            return b.NRR - a.NRR; // Sort by NRR
+        }
+    });
+}
 
-  const teamOneName = document.querySelector("#teamOne").value;
-  const teamTwoName = document.querySelector("#teamTwo").value;
-  const teamOneRuns = parseInt(document.querySelector("#teamOneRuns").value);
-  const teamOneOvers = parseFloat(document.querySelector("#teamOneOvers").value);
-  const teamTwoRuns = parseInt(document.querySelector("#teamTwoRuns").value);
-  const teamTwoOvers = parseFloat(document.querySelector("#teamTwoOvers").value);
+// Function to display the standings
+function displayStandings() {
+    const tableBody = document.getElementById('teamTableBody');
+    tableBody.innerHTML = ''; // Clear existing rows
 
-  updateStats(teamOneName, teamTwoName, teamOneRuns, teamOneOvers, teamTwoRuns, teamTwoOvers);
+    teams.forEach((team, index) => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+            <td>${index + 1}</td>
+            <td>${team.name}</td>
+            <td>${team.matches}</td>
+            <td>${team.won}</td>
+            <td>${team.lost}</td>
+            <td>${team.points}</td>
+            <td>${((team.won / team.matches) * 100).toFixed(2)}%</td>
+            <td>${team.NRR.toFixed(4)}</td>
+            <td>${team.runsFor}</td>
+            <td>${team.runsAgainst}</td>
+        `;
+        tableBody.appendChild(row);
+    });
+}
+
+// Event listener for updating statistics
+document.getElementById('updateButton').addEventListener('click', () => {
+    const teamOneName = document.getElementById('teamOne').value;
+    const teamTwoName = document.getElementById('teamTwo').value;
+    const scoreOne = parseInt(document.getElementById('scoreOne').value, 10);
+    const oversOne = parseInt(document.getElementById('oversOne').value, 10);
+    const scoreTwo = parseInt(document.getElementById('scoreTwo').value, 10);
+    const oversTwo = parseInt(document.getElementById('oversTwo').value, 10);
+
+    const teamOne = teams.find(team => team.name === teamOneName);
+    const teamTwo = teams.find(team => team.name === teamTwoName);
+
+    updateTeamStatistics(teamOne, teamTwo, scoreOne, oversOne, scoreTwo, oversTwo);
+    sortTeams();
+    displayStandings();
 });
 
-// Initial table population
-updateTable();
+// Initialize NRR for all teams
+teams.forEach(team => {
+    team.NRR = calculateNRR(team);
+});
+
+// Display initial standings
+displayStandings();
