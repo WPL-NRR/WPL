@@ -3,140 +3,100 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cricket Tournament Dashboard</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Cricket Team Standings</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        table, th, td {
+            border: 1px solid black;
+        }
+
+        th, td {
+            padding: 8px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Cricket Tournament Dashboard</h1>
 
-        <table id="teamStats">
-            <thead>
-                <tr>
-                    <th>S.No</th>
-                    <th>Team</th>
-                    <th>Mat</th>
-                    <th>Won</th>
-                    <th>Lost</th>
-                    <th>Pts</th>
-                    <th>Win%</th>
-                    <th>Net RR</th>
-                    <th>For</th>
-                    <th>Against</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>TOOFAN</td>
-                    <td class="mat">4</td>
-                    <td class="won">3</td>
-                    <td class="lost">1</td>
-                    <td class="pts">6</td>
-                    <td class="winPercent">75.00%</td>
-                    <td class="netRR">0.4500</td>
-                    <td class="for">576</td>
-                    <td class="against">531</td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td>TOP GUNS</td>
-                    <td class="mat">4</td>
-                    <td class="won">3</td>
-                    <td class="lost">1</td>
-                    <td class="pts">6</td>
-                    <td class="winPercent">75.00%</td>
-                    <td class="netRR">-0.2971</td>
-                    <td class="for">596</td>
-                    <td class="against">583</td>
-                </tr>
-                <tr>
-                    <td>3</td>
-                    <td>WOODLANDS UNITED</td>
-                    <td class="mat">4</td>
-                    <td class="won">2</td>
-                    <td class="lost">2</td>
-                    <td class="pts">4</td>
-                    <td class="winPercent">50.00%</td>
-                    <td class="netRR">0.9092</td>
-                    <td class="for">562</td>
-                    <td class="against">494</td>
-                </tr>
-                <tr>
-                    <td>4</td>
-                    <td>BHAIRAVA</td>
-                    <td class="mat">4</td>
-                    <td class="won">2</td>
-                    <td class="lost">2</td>
-                    <td class="pts">4</td>
-                    <td class="winPercent">50.00%</td>
-                    <td class="netRR">0.1158</td>
-                    <td class="for">527</td>
-                    <td class="against">543</td>
-                </tr>
-                <tr>
-                    <td>5</td>
-                    <td>WOODLANDS KHILADIS</td>
-                    <td class="mat">4</td>
-                    <td class="won">1</td>
-                    <td class="lost">3</td>
-                    <td class="pts">2</td>
-                    <td class="winPercent">25.00%</td>
-                    <td class="netRR">-0.5558</td>
-                    <td class="for">501</td>
-                    <td class="against">588</td>
-                </tr>
-                <tr>
-                    <td>6</td>
-                    <td>RAGING BULLS</td>
-                    <td class="mat">4</td>
-                    <td class="won">1</td>
-                    <td class="lost">3</td>
-                    <td class="pts">2</td>
-                    <td class="winPercent">25.00%</td>
-                    <td class="netRR">-0.7326</td>
-                    <td class="for">501</td>
-                    <td class="against">524</td>
-                </tr>
-            </tbody>
-        </table>
+    <h1>Cricket Team Standings</h1>
 
-        <h2>Input Match Result</h2>
-        <form id="matchForm">
-            <label for="teamOne">Select Team One:</label>
-            <select id="teamOne" required>
-                <option value="TOOFAN">TOOFAN</option>
-                <option value="TOP GUNS">TOP GUNS</option>
-                <option value="WOODLANDS UNITED">WOODLANDS UNITED</option>
-                <option value="BHAIRAVA">BHAIRAVA</option>
-                <option value="WOODLANDS KHILADIS">WOODLANDS KHILADIS</option>
-                <option value="RAGING BULLS">RAGING BULLS</option>
-            </select>
-            <label for="scoreOne">Score:</label>
-            <input type="number" id="scoreOne" required>
+    <!-- Form for entering scores -->
+    <form id="scoreForm">
+        <label for="teamOne">Select Team One:</label>
+        <select id="teamOne" required>
+            <option value="TOOFAN">TOOFAN</option>
+            <option value="TOP GUNS">TOP GUNS</option>
+            <option value="WOODLANDS UNITED">WOODLANDS UNITED</option>
+            <option value="BHAIRAVA">BHAIRAVA</option>
+            <option value="WOODLANDS KHILADIS">WOODLANDS KHILADIS</option>
+            <option value="RAGING BULLS">RAGING BULLS</option>
+        </select>
 
-            <label for="oversOne">Overs:</label>
-            <input type="number" id="oversOne" required>
+        <label for="teamOneRuns">Team One Runs:</label>
+        <input type="number" id="teamOneRuns" required>
 
-            <label for="teamTwo">Select Team Two:</label>
-            <select id="teamTwo" required>
-                <option value="TOOFAN">TOOFAN</option>
-                <option value="TOP GUNS">TOP GUNS</option>
-                <option value="WOODLANDS UNITED">WOODLANDS UNITED</option>
-                <option value="BHAIRAVA">BHAIRAVA</option>
-                <option value="WOODLANDS KHILADIS">WOODLANDS KHILADIS</option>
-                <option value="RAGING BULLS">RAGING BULLS</option>
-            </select>
-            <label for="scoreTwo">Score:</label>
-            <input type="number" id="scoreTwo" required>
+        <label for="teamOneOvers">Team One Overs:</label>
+        <input type="number" step="0.1" id="teamOneOvers" required>
 
-            <label for="oversTwo">Overs:</label>
-            <input type="number" id="oversTwo" required>
+        <br><br>
 
-            <button type="submit">Submit Match Result</button>
-        </form>
-    </div>
+        <label for="teamTwo">Select Team Two:</label>
+        <select id="teamTwo" required>
+            <option value="TOOFAN">TOOFAN</option>
+            <option value="TOP GUNS">TOP GUNS</option>
+            <option value="WOODLANDS UNITED">WOODLANDS UNITED</option>
+            <option value="BHAIRAVA">BHAIRAVA</option>
+            <option value="WOODLANDS KHILADIS">WOODLANDS KHILADIS</option>
+            <option value="RAGING BULLS">RAGING BULLS</option>
+        </select>
+
+        <label for="teamTwoRuns">Team Two Runs:</label>
+        <input type="number" id="teamTwoRuns" required>
+
+        <label for="teamTwoOvers">Team Two Overs:</label>
+        <input type="number" step="0.1" id="teamTwoOvers" required>
+
+        <br><br>
+        <button type="submit">Update</button>
+    </form>
+
+    <br><br>
+
+    <!-- Table for displaying team standings -->
+    <table id="teamsTable">
+        <thead>
+            <tr>
+                <th>S.No</th>
+                <th>Team</th>
+                <th>Mat</th>
+                <th>Won</th>
+                <th>Lost</th>
+                <th>Pts</th>
+                <th>Win%</th>
+                <th>Net RR</th>
+                <th>For</th>
+                <th>Against</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Dynamic team stats will be inserted here by JavaScript -->
+        </tbody>
+    </table>
 
     <script src="script.js"></script>
+
 </body>
 </html>
